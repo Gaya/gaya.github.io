@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Becoming better at JavaScript</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/moon.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/monokai-sublime.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section data-background="#fff">
+					<img style="box-shadow: none;" src="images/meetup1.png" alt="">
+				</section>
+
+				<section data-background="#fff">
+					<img style="box-shadow: none;" src="images/meetup2.png" alt="">
+				</section>
+
+				<section>
+					<h1>Becoming better at JavaScript.</h1>
+					<p>Eindhoven Developers Meetup</p>
+					<pre><code data-trim data-noescape class="javascript" style="text-align: center;">new Date(2016, 0, 26);</code></pre>
+				</section>
+
+				<section>
+					<h1>Gaya Kessler</h1>
+					<ul>
+						<li>Lead Frontend Developer<br />for BaaS at GHG Tech</li>
+						<li>Likes JavaScript</li>
+						<li>https://blog.gaya.ninja</li>
+						<li><a href="https://twitter.com/GayaNinja">@GayaNinja</a></li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>The typical JavaScript developer?</h2>
+					<ul>
+						<li>Probably uses or used jQuery</li>
+						<li>Familiar with Ajax</li>
+						<li>Knows how to code</li>
+						<li>Tried or uses a form of OOP</li>
+					</ul>
+				</section>
+
+				<section data-background="images/5ed7f737-5ca3-4930-88da-c1276cdd8ed4-1020x612.jpeg">
+					<h2><span style="background: #d33682; padding: 0 20px;">Frontend is moving fast</span></h2>
+				</section>
+
+				<section>
+					<h1>ES6 / ES7 / ESWHATEVER</h1>
+				</section>
+
+				<section>
+					<h1>Grunt / Gulp / Webpack / NPM</h1>
+				</section>
+
+				<section>
+					<h1>ALL THESE F*CKING FRAMEWORKS</h1>
+				</section>
+
+				<section data-background="images/wood-for-trees.gif">
+					<h2>I can't see wood for trees</h2>
+				</section>
+
+				<section>
+					<h1>So what now?</h1>
+
+					<h2>Learn something new?</h2>
+				</section>
+
+				<section>
+					<h2>New ES versions, maybe React?</h2>
+				</section>
+
+				<section>
+					<h1>Nope.</h1>
+				</section>
+
+				<section>
+					<h1>The 'why' is more important than the 'how'</h1>
+				</section>
+
+				<section>
+					<h1>Go learn ES5 again.</h1>
+				</section>
+
+				<section>
+					<h2>Think in isolated module style coding.</h2>
+					<h3>Isolate</h3>
+					<h3>Low coupling</h3>
+					<h3>high cohesion</h3>
+					<h3>Single responsibility</h3>
+				</section>
+
+				<section>
+					<h1>"Do One Thing and Do It Well."</h1>
+					<h3>- Unix philosophy</h3>
+				</section>
+
+				<section>
+					<h1>Revise knowlegde about scope and closures</h1>
+				</section>
+
+				<section>
+					<h1>What is <code>this</code>?</h1>
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="javascript">
+function foo(cb) {
+  this.a = 'hey';
+  cb();
+}
+
+function bar() {
+  console.log(this.a);
+}
+
+var hi = bar;
+hi.a = 'hi';
+
+foo(hi); //hey
+</code></pre>
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="javascript">
+function foo(cb) {
+  this.a = 'hey';
+  cb();
+}
+
+function bar() {
+  console.log(this.a);
+}
+
+var hi = bar;
+hi.a = 'hi';
+
+foo(hi.bind(hi)); //hi
+</code></pre>
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="javascript">
+function foo(cb) {
+  this.a = 'hey';
+  cb.call(this); //<-- wait a minute!
+}
+
+function bar() {
+  console.log(this.a);
+}
+
+var hi = bar;
+hi.a = 'hi';
+
+foo(hi.bind(hi)); //hi --- pfew!
+</code></pre>
+				</section>
+
+				<section>
+					<h1>Beware of frameworks!</h1>
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="javascript">
+const Thing = React.createClass({
+  foo() {
+    this.bar();
+  },
+
+  bar() {
+    console.log('Hi');
+  },
+
+  render() { return &lt;button onClick={this.foo} /&gt;; },
+});
+</code></pre>
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="javascript">
+var Thing = {
+  foo: function() {
+    this.bar(); //Uncaught TypeError: this.bar is
+                //not a function
+  },
+
+  bar: function() {
+    console.log('Hi');
+  }
+};
+
+document.getElementById('something')
+  .addEventListener('click', Thing.foo);
+</code></pre>
+				</section>
+
+				<section>
+					<h1>Learn about prototypical inheritance</h1>
+				</section>
+
+				<section>
+					<h1>"Composition over inheritance."</h1>
+					<h3>- Design Patterns by Gang of Four (1994)</h3>
+				</section>
+				
+				<section>
+					<h3>How we explain inheritance:</h3>
+					<img src="images/Image1.gif" alt="">
+				</section>
+
+				<section data-background="images/venicea01.jpg"></section>
+
+				<section>
+					<h1>Execute function in different contexts</h1>
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="javascript">
+var Foo = {
+  a: 'World',
+  bar: function() {
+    console.log(this.a);
+  },
+};
+
+var Whoop = {
+  a: 'Hello',
+  bar: Foo.bar,
+};
+
+Whoop.bar(); //Hello
+</code></pre>
+				</section>
+
+				<section>
+					<h1>Problem with classes in JavaScript</h1>
+					<h2>A class should be a blueprint</h2>
+				</section>
+
+				<section>
+					<h2>Construction function !== class</h2>
+<pre><code data-trim data-noescape class="javascript">
+function Foo() {} //<-- already an instance
+Foo.prototype.bar = function() {};
+
+new foo = Foo(); //1. new object
+                 //2. constructor of Foo
+                 //3. delegate to Foo.prototype
+                 //4. call Foo() in new context
+</code></pre>
+				</section>
+
+				<section>
+					<h2>Better</h2>
+<pre><code data-trim data-noescape class="javascript">
+var Foo = {
+  bar: function() {},
+};
+
+var foo = Object.create(Foo, {
+  a: { value: 'hi' }
+});
+
+//or
+
+var foo = Object.create(Foo);
+foo.a = 'hi';
+</code></pre>
+				</section>
+
+				<section>
+					<h2>Use linters and style guides!</h2>
+					<h3>Keeps code consistent</h3>
+					<h3>Keeps code clear</h3>
+					<h3>Keeps code cleaner</h3>
+				</section>
+
+				<section>
+					<h2>Tools:</h2>
+					<h3>JSHint</h3>
+					<h3>JSCS</h3>
+					<h3>Airbnb</h3>
+				</section>
+
+				<section>
+					<h1>;</h1>
+					<h3>Just... type the damn thing.</h3>
+				</section>
+
+				<section>
+					<h1>Modules and structure</h1>
+				</section>
+
+				<section>
+					<h2>require or import</h2>
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="javascript">
+//index.js
+var Obj = require('./obj');
+
+//obj.js
+var Obj = {};
+
+module.exports = Obj;
+</code></pre>
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="javascript">
+//index.js
+import Obj from './obj';
+
+//obj.js
+export default {};
+</code></pre>
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="javascript">
+//index.js
+import * as lib from './obj';
+
+lib.foo();
+
+//or
+import { foo, bar } from './obj';
+foo();
+
+//obj.js
+export function foo() {};
+export function bar() {};
+</code></pre>
+				</section>
+
+				<section>
+					<h2>Dependency management using NPM</h2>
+					<h3>browserify, webpack, babel</h3>
+				</section>
+
+				<section>
+					<h2>Learn from doing Node.js</h2>
+					<h3>eg. making tools</h3>
+				</section>
+
+				<section>
+					<h2>Be wary of starters</h2>
+				</section>
+
+				<section>
+					<h1>Async is kind of promising</h1>
+				</section>
+
+				<section>
+					<h2>Callbacks are "just" executable arguments</h2>
+				</section>
+
+				<section>
+					<h2>Avoid nesting callbacks inline</h2>
+<pre><code data-trim data-noescape class="javascript">
+setTimeout(function() {
+  setTimeout(function() {
+    setTimeout(function() {}, 0);
+  }, 0);
+}, 0);
+</code></pre>
+				</section>
+
+				<section>
+					<h1>Callbacks from hell</h1>
+					<h3>Passing along callback can become complicated, quick.</h3>
+				</section>
+
+				<section>
+					<h3>https://github.com/caolan/async</h3>
+<pre><code data-trim data-noescape class="javascript">
+async.map(['file1','file2'], fs.stat,
+  function(err, results){
+    //results is now an array of stats
+    //for each file
+  });
+
+async.parallel([
+  function(){ ... },
+  function(){ ... }
+], callback);
+
+async.series([
+  function(){ ... },
+  function(){ ... }
+]);
+</code></pre>
+				</section>
+
+				<section>
+					<h2>Promises solve handling of callbacks</h2>
+					<h3>(you're still trusting them though)</h3>
+				</section>
+
+				<section>
+					<h2>Before you use promises, know callbacks</h2>
+				</section>
+
+				<section>
+					<h2>Learn more about promises and generator</h2>
+					<h3>(as do I)</h3>
+				</section>
+
+				<section>
+					<h2>Await async await</h2>
+					<h3>but more later...</h3>
+				</section>
+
+				<section>
+					<h1>Recap</h1>
+					<h3>Learn ES5 again</h3>
+					<h3>Use behavior delegation</h3>
+					<h3>Use linters and style guides</h3>
+					<h3>Structure code in modules</h3>
+					<h3>Understand async</h3>
+				</section>
+
+				<section>
+					<h1>Thanks!</h1>
+					<h3>Gaya Kessler</h3>
+				</section>
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: false,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
