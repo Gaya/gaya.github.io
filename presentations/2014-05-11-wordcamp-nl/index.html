@@ -1,0 +1,663 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Front-end Development Automatisatie, WP Meetup Tilburg, Gaya Kessler</title>
+
+	<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+	<meta name="author" content="Hakim El Hattab">
+
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/moon.css" id="theme">
+
+	<!-- For syntax highlighting -->
+	<!--<link rel="stylesheet" href="lib/css/zenburn.css">-->
+	<link rel="stylesheet" href="plugin/prismjs/prism.css">
+
+	<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+	<script>
+		document.write('<link rel="stylesheet" href="css/print/' + ( window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">');
+	</script>
+
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+
+	<!-- Any section element inside of this container is displayed as a slide -->
+	<div class="slides">
+		<section>
+			<h1>Front-end Development Automation</h1>
+			<h2>Improving the workflow</h2>
+			<p>
+				WordCamp NL, May 11th 2014
+			</p>
+			<p>
+				Gaya Kessler
+			</p>
+			<aside class="notes">
+				<ul>
+					<li>Telefoon enzo op stil. Aan mag, tweeten</li>
+					<li>Front-end dev. Weinig tot geen WP</li>
+				</ul>
+			</aside>
+		</section>
+		<section>
+			<h1>Gaya Kessler</h1>
+			<h4>Senior Lead Web Developer Ninja<br />at Merchandise.nl</h4>
+			<p>
+				Blog: <a href="http://www.gayadesign.com">http://www.gayadesign.com</a>
+			</p>
+			<p>
+				Slides: <a href="http://talk.gayadesign.com">http://talk.gayadesign.com</a>
+			</p>
+			<p>
+				Twitter: <a href="http://www.twitter.com/gayadesign">@gayadesign</a>
+			</p>
+			<aside class="notes">
+				<ul>
+					<li>Voorstellen</li>
+					<li>Wie gebruikt er al automatisatie tools?</li>
+				</ul>
+			</aside>
+		</section>
+		<section>
+			<h1>Front-end Development</h1>
+			<h2>in a nutshell</h2>
+			<p>
+				<span class="fragment">HTML,</span>
+				<span class="fragment">CSS,</span>
+				<span class="fragment">images,</span>
+				<span class="fragment">JavaScript,</span>
+				<span class="fragment">other assets,</span>
+				<span class="fragment">optimization of assets,</span>
+				<span class="fragment">optimization for the browser,</span>
+                <span class="fragment">unit tests uitvoeren</span>
+			</p>
+			<aside class="notes">
+				HTML, CSS, images, JavaScript, overige assets (zoals filmpjes),<br />
+				optimalisatie assets, (imagemin)<br />
+				optimalisatie voor de browser, (javascripts minifyen etc)<br />
+                unit testing
+			</aside>
+		</section>
+		<section>
+			<h2>There is a change in our source</h2>
+			<p class="fragment">here we go again...</p>
+			<p>
+                <span class="fragment">optimization of assets,</span>
+                <span class="fragment">optimization for the browser,</span>
+                <span class="fragment">unit tests uitvoeren</span>
+			</p>
+		</section>
+		<section>
+			<h2>But wait! The project just scaled!</h2>
+			<p class="fragment">CSS is not manageable.</p>
+			<p class="fragment">JavaScript is a pile of junk.</p>
+			<p class="fragment">Optimization is time expensive.</p>
+            <aside class="notes">
+                dev, dist en build uitleggen.<br />
+                belang van scheiden van files.
+            </aside>
+		</section>
+		<section data-background="images/sheldon-fts.gif">
+			<!--FUCK DIS SHIT-->
+		</section>
+		<section>
+			<h1>There is hope</h1>
+		</section>
+		<section>
+			<h1>CSS Preprocessors</h1>
+			<h3>Bring logic to your CSS</h3>
+		</section>
+		<section>
+			<img src="images/sass-logo.png" class="no-markup" alt="" />
+			<aside class="notes">
+				Fans?<br />
+				Uitleggen compilen.<br />
+			</aside>
+		</section>
+		<section>
+			<pre><code data-trim class="language-bash large">
+$ gem install sass
+			</code></pre>
+			<aside class="notes">
+				Ruby, standaard op Mac OSX<br />
+				Windows makkelijk.
+			</aside>
+		</section>
+		<section>
+			<h2>Variables</h2>
+
+			<h4>Sass</h4>
+			<pre><code data-trim class="language-scss">
+$header-color: #666;
+$body-color: #333;
+
+body {
+    color: $body-color;
+}
+
+h1, h2, h3, h4 {
+    color: $header-color;
+}
+			</code></pre>
+
+			<h4>CSS</h4>
+			<pre><code data-trim class="language-scss">
+body {
+    color: #333;
+}
+
+h1, h2, h3, h4 {
+    color: #666;
+}
+			</code></pre>
+		</section>
+		<section>
+			<h2>Nesting</h2>
+
+			<pre><code class="language-scss">
+.header {
+    ul {
+        margin: 0px;
+
+        li {
+            padding: 0px;
+            font: {
+                family: 'Open Sans', sans-serif;
+                size: 21pt;
+            }
+
+            &:hover {
+                background: #666;
+            }
+        }
+    }
+}
+</code></pre>
+<br />
+			<pre><code data-trim class="language-scss">
+.header ul {
+    margin: 0px;
+}
+
+.header ul li {
+    padding: 0px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 21pt;
+}
+
+.header ul li:hover {
+    background: #666;
+}
+			</code></pre>
+			<aside class="notes">
+				Zonder CSS heel vervelende werk.<br />
+				Vooral als er een selector veranderd. AARGGG
+			</aside>
+		</section>
+		<section>
+			<h2>Partials &amp; Imports</h2>
+
+			<h4>&nbsp;</h4>
+			<pre><code data-trim class="language-scss large">
+/* _settings.scss, _layout.scss */
+
+@import "settings";
+@import "layout";
+
+body {
+    background-color: $body-color;
+    color: $body-text;
+}
+			</code></pre>
+			<aside class="notes">
+				Zie het als deeltje.<br />
+				Atomic design.
+			</aside>
+		</section>
+		<section>
+			<h2>Mixins</h2>
+
+			<h4>Sass</h4>
+			<pre><code data-trim class="language-scss">
+@mixin fix-for-ie6($display) {
+    display: $display;
+}
+
+header {
+    @include fix-for-ie6(none);
+}
+			</code></pre>
+
+			<h4>CSS</h4>
+			<pre><code data-trim class="language-scss">
+header {
+    display: none;
+}
+			</code></pre>
+			<aside class="notes">
+				Stukken CSS laten genereren.<br />
+				Goed voor rekenwerk en loops.
+			</aside>
+		</section>
+		<section>
+			<h2>Extending / Inheritance</h2>
+
+			<h4>Sass</h4>
+			<pre><code data-trim class="language-scss">
+.button {
+    border-radius: 2px;
+    background: #eee;
+    color: #420;
+}
+
+.submit {
+    @extend .button;
+}
+
+.next {
+    @extend .button;
+}
+			</code></pre>
+
+			<h4>CSS</h4>
+			<pre><code data-trim class="language-scss">
+.button, .submit, .next {
+    border-radius: 2px;
+    background: #eee;
+    color: #420;
+}
+			</code></pre>
+			<aside class="notes">
+				Geen domme selectors, laat dat SASS oplossen.
+			</aside>
+		</section>
+        <section>
+            <h2>Great with BEM and OOCSS</h2>
+
+            <h4>HTML</h4>
+            <pre><code data-trim class="language-markup">
+&lt;element class="block--modifier">
+    &lt;element class="block__element" />
+&lt;/element>
+            </code></pre>
+
+            <h4>Sass</h4>
+			<pre><code data-trim class="language-scss">
+.block {
+    position:relative;
+    width: 50px;
+
+    &__element {
+        position:absolute;
+    }
+
+    &--modifier {
+        @extend .block;
+        width: 100px;
+        height: 10px;
+    }
+}
+            </code></pre>
+            <aside class="notes">
+                Compound selectors + Extending
+            </aside>
+        </section>
+        <section>
+            <h2>Great with BEM and OOCSS</h2>
+
+            <h4>CSS</h4>
+			<pre><code data-trim class="language-css">
+.block, .block--modifier {
+    position: relative;
+    width: 50px;
+}
+
+.block__element {
+    position: absolute;
+}
+
+.block--modifier {
+    width: 100px;
+    height: 10px;
+}
+            </code></pre>
+            <aside class="notes">
+                Compound selectors + Extending
+            </aside>
+        </section>
+		<section>
+			<h2>But wait... there is more!</h2>
+
+			<div class="fragment">
+				<img src="images/compass-logo.png" class="no-markup" alt="" />
+			</div>
+		</section>
+		<section>
+			<pre><code data-trim class="language-bash large">
+$ gem install compass
+			</code></pre>
+		</section>
+		<section>
+			<h2>Just a small config.rb</h2>
+			<pre><code data-trim class="language-ruby large">
+relative_assets = true
+css_dir = "css"
+sass_dir = "sass"
+images_dir = "images"
+
+output_style = :expanded # After dev :compressed
+
+line_comments = true
+
+preferred_syntax = :scss
+			</code></pre>
+		</section>
+        <section>
+            <h4>Some great things</h4>
+            <ul>
+                <li class="fragment">CSS3 prefixes</li>
+                <li class="fragment">Color calculation</li>
+                <li class="fragment">Getting image dimension</li>
+                <li class="fragment">Assets' relative URLs</li>
+                <li class="fragment">Maintaining a Vertical Rhytmn</li>
+                <li class="fragment">Sprites</li>
+            </ul>
+        </section>
+		<section>
+			<h4>A Tale of Sprites</h4>
+
+            <img src="images/sprites-source.png" class="no-markup" alt="" />
+		</section>
+        <section>
+            <h4>Sass</h4>
+            <pre><code data-trim class="language-scss large">
+@import "compass/utilities/sprites";
+@import "silk-icons/*.png";
+
+.add-button {
+    @include silk-icons-sprite("add");
+}
+                </code></pre>
+        </section>
+        <section>
+            <img src="images/sprites-terminal.png" class="no-markup" alt="" />
+        </section>
+        <section>
+            <img src="images/sprites-sprite.png" class="no-markup" alt="" />
+        </section>
+        <section>
+            <h4>CSS</h4>
+            <pre><code data-trim class="language-css large">
+.silk-icons-sprite, .add-button {
+    background: url('../images/silk-icons-sfbf7044fd4.png') no-repeat;
+}
+
+.add-button {
+    background-position: 0 -16px;
+}
+            </code></pre>
+        </section>
+		<section>
+			<h3>"But it takes so much time and effort to learn."</h3>
+			<h1 class="fragment">NOPE!</h1>
+		</section>
+		<section>
+			<h1>Task Runners</h1>
+			<h3>forget about the repetitive tasks</h3>
+		</section>
+		<section data-background="#F5F6F6">
+				<img src="images/grunt-logo.png" class="no-markup" alt="" />
+			<aside class="notes">
+				Je hebt ook Gulp, ga ik niet over hebben.<br />
+				Draait op NodeJS.<br />
+				Net als SASS, soort compiler.<br />
+				Kan herhalende taken (en meer) voor je uitvoeren.
+			</aside>
+		</section>
+		<section>
+			<h2>Create a list of tasks you need</h2>
+
+			<ul>
+				<li class="fragment">
+					Concatinate JavaScript source files
+				</li>
+				<li class="fragment">
+					Run JSHint
+				</li>
+				<li class="fragment">
+					Run Unittests
+				</li>
+				<li class="fragment">
+					Remove console.log debugging. <span class="fragment">Fucking IE...</span>
+				</li>
+				<li class="fragment">
+					Uglify the generated outcome
+				</li>
+			</ul>
+		</section>
+		<section>
+			<h3>When will these tasks be needed?</h3>
+
+			<ul>
+				<li>
+					In development: (when hitting "save")
+					<ul>
+						<li class="fragment">Concatinate JavaScript source files</li>
+						<li class="fragment">JSHint</li>
+						<li class="fragment">Run Unittests</li>
+					</ul><br />
+				</li>
+				<li class="fragment">
+					At build:
+					<ul>
+						<li class="fragment">All development tasks</li>
+						<li class="fragment">Remove console.log debugging</li>
+						<li class="fragment">Uglify the generated outcome</li>
+					</ul>
+				</li>
+			</ul>
+			<aside class="notes">
+				Watch net als SASS.<br />
+				Deploy zou je zelfs kunnen doen.
+			</aside>
+		</section>
+		<section>
+			<h3>This can all be automated?</h3>
+			<h1 class="fragment">Yes. Easily.</h1>
+		</section>
+		<section data-background="images/crying.gif">
+			<!--It's so beautiful-->
+		</section>
+		<section>
+			<h2>Step 1: Install NodeJS</h2>
+
+			<div>
+				<a href="http://nodejs.org/download/">http://nodejs.org/download/</a>
+			</div>
+		</section>
+		<section>
+			<h2>Step 2: Install Grunt CLI</h2>
+
+			<pre><code data-trim class="language-bash large">
+$ npm install -g grunt-cli
+			</code></pre>
+		</section>
+		<section>
+			<h1>What does NPM do?</h1>
+		</section>
+		<section>
+			<h2>package.json</h2>
+			<pre><code data-trim class="language-javascript large">
+{
+	"name": "project-name",
+	"version": "1.3.37",
+	"description": "An example project!",
+	"main": "",
+	"scripts": {
+		"test": "grunt test"
+	},
+	"author": "Gaya Kessler",
+	"license": "MIT",
+	"devDependencies": {
+		"grunt": "~0.4.2"
+	}
+}
+			</code></pre>
+		</section>
+		<section>
+			<h2>Adding Grunt as a dependency of your project</h2>
+			<pre><code data-trim class="language-javascript large">
+$ npm install grunt --save-dev
+			</code></pre>
+		</section>
+		<section>
+			<h2>Find Grunt plugins</h2>
+			<p>
+				<a href="http://gruntjs.com/plugins">http://gruntjs.com/plugins</a>
+			</p>
+		</section>
+		<section>
+			<h2>We need</h2>
+			<ul>
+				<li>Watch changes on source files <span style="color: #00ff18">&gt; grunt-contrib-watch</span></li>
+				<li>Concatinate source <span style="color: #00ff18">&gt; grunt-contrib-concat</span></li>
+				<li>JSHint <span style="color: #00ff18">&gt; grunt-contrib-jshint</span></li>
+				<li>Unittesting <span style="color: #00ff18">&gt; grunt-contrib-qunit</span></li>
+				<li>Console.log removing <span style="color: #00ff18">&gt; grunt-remove-logging</span></li>
+				<li>Uglification <span style="color: #00ff18">&gt; grunt-contrib-uglify</span></li>
+			</ul>
+		</section>
+		<section>
+            <h2>Front-ender's webserver</h2>
+            <ul>
+                <li class="fragment">Use 'connect' to run middleware with NodeJS</li>
+                <li class="fragment">Websockets</li>
+                <li class="fragment">Livereload</li>
+                <li class="fragment">Serving static mockup data</li>
+            </ul>
+		</section>
+		<section>
+			<h2>What's next?</h2>
+		</section>
+		<section data-background="#F5F6F6">
+			<img src="images/yeoman-horizontal.gif" class="no-markup" alt="" />
+		</section>
+		<section>
+			<h2>What can Yeoman do for me?</h2>
+			<ul>
+				<li>
+					Project scaffolding
+				</li>
+				<li>
+					Removes the effort of creating new projects
+				</li>
+                <li>
+                    It automates automatisation
+                </li>
+			</ul>
+		</section>
+		<section>
+			<h2>Yeoman generator example</h2>
+			<ul>
+				<li class="fragment">
+					Create vagrant box for testing.
+				</li>
+				<li class="fragment">
+					Gruntfile with all dev and build tasks.
+				</li>
+				<li class="fragment">
+					Basic Sass setup with libs and mixins.
+				</li>
+				<li class="fragment">
+					Latest version of platform you're working with.
+				</li>
+				<li class="fragment">
+					No more config hell, it works.
+				</li>
+			</ul>
+		</section>
+		<section data-background="images/jp.gif">
+			<!--DON'T SUE ME SPIELBERG-->
+		</section>
+		<section>
+			<h2>Thank you for listening!</h2>
+
+			<h1>Any questions?</h1>
+
+			<p>
+				Blog: <a href="http://www.gayadesign.com">http://www.gayadesign.com</a>
+			</p>
+			<p>
+				Slides: <a href="http://talk.gayadesign.com">http://talk.gayadesign.com</a>
+			</p>
+			<p>
+				Twitter: <a href="http://www.twitter.com/gayadesign">@gayadesign</a>
+			</p>
+		</section>
+	</div>
+
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.min.js"></script>
+
+<script>
+
+	// Full list of configuration options available here:
+	// https://github.com/hakimel/reveal.js#configuration
+	Reveal.initialize({
+		controls: true,
+		progress: true,
+		history : true,
+		center  : true,
+		parallaxBackgroundImage: 'images/bg-pattern.png',
+		transitionSpeed: "fast",
+
+		theme       : Reveal.getQueryHash().theme, // available themes are in /css/theme
+		transition  : Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+		// Parallax scrolling
+		// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+		// parallaxBackgroundSize: '2100px 900px',
+
+		// Optional libraries used to extend on reveal.js
+		dependencies: [
+			{ src: 'lib/js/classList.js', condition: function () {
+				return !document.body.classList;
+			} },
+			{ src: 'plugin/markdown/marked.js', condition: function () {
+				return !!document.querySelector('[data-markdown]');
+			} },
+			{ src: 'plugin/markdown/markdown.js', condition: function () {
+				return !!document.querySelector('[data-markdown]');
+			} },
+			{ src: 'plugin/prismjs/prism.js', async: true, callback: function () {
+				Prism.highlightAll();
+			} },
+			{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function () {
+				return !!document.body.classList;
+			} },
+			{ src: 'plugin/notes/notes.js', async: true, condition: function () {
+				return !!document.body.classList;
+			} }
+		]
+	});
+
+</script>
+
+</body>
+</html>

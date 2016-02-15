@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Front-end Development Automatisatie, WP Meetup Tilburg, Gaya Kessler</title>
+
+	<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+	<meta name="author" content="Hakim El Hattab">
+
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/moon.css" id="theme">
+
+	<!-- For syntax highlighting -->
+	<!--<link rel="stylesheet" href="lib/css/zenburn.css">-->
+	<link rel="stylesheet" href="plugin/prismjs/prism.css">
+
+	<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+	<script>
+		document.write('<link rel="stylesheet" href="css/print/' + ( window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">');
+	</script>
+
+	<!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+
+	<!-- Any section element inside of this container is displayed as a slide -->
+	<div class="slides">
+		<section>
+			<h1>Front-end Development Automatisatie</h1>
+			<h2>Verbeter je werkwijze</h2>
+			<p>
+				WordPress Meetup Tilburg, 12 Maart 2014
+			</p>
+			<p>
+				Gaya Kessler
+			</p>
+			<aside class="notes">
+				<ul>
+					<li>Telefoon enzo op stil. Aan mag, tweeten</li>
+					<li>Front-end dev. Weinig tot geen WP</li>
+				</ul>
+			</aside>
+		</section>
+		<section>
+			<h1>Gaya Kessler</h1>
+			<h4>Senior Lead Web Developer Ninja<br />bij Merchandise.nl</h4>
+			<p>
+				Blog: <a href="http://www.gayadesign.com">http://www.gayadesign.com</a>
+			</p>
+			<p>
+				Slides: <a href="http://talk.gayadesign.com">http://talk.gayadesign.com</a>
+			</p>
+			<p>
+				Twitter: <a href="http://www.twitter.com/gayadesign">@gayadesign</a>
+			</p>
+			<aside class="notes">
+				<ul>
+					<li>Voorstellen</li>
+					<li>Wie gebruikt er al automatisatie tools?</li>
+				</ul>
+			</aside>
+		</section>
+		<section>
+			<h1>Front-end Development</h1>
+			<h2>in a nutshell</h2>
+			<p>
+				<span class="fragment">HTML,</span>
+				<span class="fragment">CSS,</span>
+				<span class="fragment">images,</span>
+				<span class="fragment">JavaScript,</span>
+				<span class="fragment">overige assets,</span>
+				<span class="fragment">optimalisatie assets,</span>
+				<span class="fragment">optimalisatie voor de browser,</span>
+                <span class="fragment">unit tests uitvoeren</span>
+			</p>
+			<aside class="notes">
+				HTML, CSS, images, JavaScript, overige assets (zoals filmpjes),<br />
+				optimalisatie assets, (imagemin)<br />
+				optimalisatie voor de browser, (javascripts minifyen etc)<br />
+                unit testing
+			</aside>
+		</section>
+		<section>
+			<h2>Er moet een aanpassing gedaan worden</h2>
+			<p class="fragment">Dus gaan we weer..</p>
+			<p>
+				<span class="fragment">optimalisatie assets,</span>
+				<span class="fragment">optimalisatie voor de browser,</span>
+                <span class="fragment">unit testing</span>
+			</p>
+		</section>
+		<section>
+			<h2>Oh wacht! Het project wordt groter</h2>
+			<p class="fragment">CSS is niet te beheersen.</p>
+			<p class="fragment">JavaScript is een ophoping van ellende.</p>
+			<p class="fragment">Optimalisatie kost te veel tijd.</p>
+            <aside class="notes">
+                dev, dist en build uitleggen.<br />
+                belang van scheiden van files.
+            </aside>
+		</section>
+		<section data-background="images/sheldon-fts.gif">
+			<!--FUCK DIS SHIT-->
+		</section>
+		<section>
+			<h1>Er is hoop</h1>
+		</section>
+		<section>
+			<h1>CSS Preprocessors</h1>
+			<h3>Breng logica naar je CSS</h3>
+		</section>
+		<section>
+			<img src="images/sass-logo.png" class="no-markup" alt="" />
+			<aside class="notes">
+				Fans?<br />
+				Uitleggen compilen.<br />
+			</aside>
+		</section>
+		<section>
+			<pre><code data-trim class="language-bash large">
+$ gem install sass
+			</code></pre>
+			<aside class="notes">
+				Ruby, standaard op Mac OSX<br />
+				Windows makkelijk.
+			</aside>
+		</section>
+		<section>
+			<h2>Variablen</h2>
+
+			<h4>Sass</h4>
+			<pre><code data-trim class="language-scss">
+$header-color: #666;
+$body-color: #333;
+
+body {
+    color: $body-color;
+}
+
+h1, h2, h3, h4 {
+    color: $header-color;
+}
+			</code></pre>
+
+			<h4>CSS</h4>
+			<pre><code data-trim class="language-scss">
+body {
+    color: #333;
+}
+
+h1, h2, h3, h4 {
+    color: #666;
+}
+			</code></pre>
+		</section>
+		<section>
+			<h2>Nesting</h2>
+
+			<pre><code class="language-scss">
+.header {
+    ul {
+        margin: 0px;
+
+        li {
+            padding: 0px;
+            font: {
+                family: 'Open Sans', sans-serif;
+                size: 21pt;
+            }
+
+            &:hover {
+                background: #666;
+            }
+        }
+    }
+}
+</code></pre>
+<br />
+			<pre><code data-trim class="language-scss">
+.header ul {
+    margin: 0px;
+}
+
+.header ul li {
+    padding: 0px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 21pt;
+}
+
+.header ul li:hover {
+    background: #666;
+}
+			</code></pre>
+			<aside class="notes">
+				Zonder CSS heel vervelende werk.<br />
+				Vooral als er een selector veranderd. AARGGG
+			</aside>
+		</section>
+		<section>
+			<h2>Partials en Imports</h2>
+
+			<h4>&nbsp;</h4>
+			<pre><code data-trim class="language-scss large">
+/* _settings.scss, _layout.scss */
+
+@import "settings";
+@import "layout";
+
+body {
+    background-color: $body-color;
+    color: $body-text;
+}
+			</code></pre>
+			<aside class="notes">
+				Zie het als deeltje.<br />
+				Atomic design.
+			</aside>
+		</section>
+		<section>
+			<h2>Mixins</h2>
+
+			<h4>Sass</h4>
+			<pre><code data-trim class="language-scss">
+@mixin fix-for-ie6($display) {
+    display: $display;
+}
+
+header {
+    @include fix-for-ie6(none);
+}
+			</code></pre>
+
+			<h4>CSS</h4>
+			<pre><code data-trim class="language-scss">
+header {
+    display: none;
+}
+			</code></pre>
+			<aside class="notes">
+				Stukken CSS laten genereren.<br />
+				Goed voor rekenwerk en loops.
+			</aside>
+		</section>
+		<section>
+			<h2>Extend / Inheritance</h2>
+
+			<h4>Sass</h4>
+			<pre><code data-trim class="language-scss">
+.button {
+    border-radius: 2px;
+    background: #eee;
+    color: #420;
+}
+
+.submit {
+    @extend .button;
+}
+
+.next {
+    @extend .button;
+}
+			</code></pre>
+
+			<h4>CSS</h4>
+			<pre><code data-trim class="language-scss">
+.button, .submit, .next {
+    border-radius: 2px;
+    background: #eee;
+    color: #420;
+}
+			</code></pre>
+			<aside class="notes">
+				Geen domme selectors, laat dat SASS oplossen.
+			</aside>
+		</section>
+		<section>
+			<h2>But wait... there is more!</h2>
+
+			<div class="fragment">
+				<img src="images/compass-logo.png" class="no-markup" alt="" />
+			</div>
+		</section>
+		<section>
+			<pre><code data-trim class="language-bash large">
+$ gem install compass
+			</code></pre>
+		</section>
+		<section>
+			<h2>Een klein config bestand</h2>
+			<pre><code data-trim class="language-ruby large">
+relative_assets = true
+css_dir = "css"
+sass_dir = "sass"
+images_dir = "images"
+
+output_style = :expanded # After dev :compressed
+
+line_comments = true
+
+preferred_syntax = :scss
+			</code></pre>
+		</section>
+		<section>
+			<h4>Live demo sprites</h4>
+		</section>
+		<section>
+			<h3>maar het kost zo veel tijd om te leren</h3>
+			<h1 class="fragment">NOPE!</h1>
+		</section>
+		<section>
+			<h1>Task Runners</h1>
+			<h3>herhalende taken uit handen geven</h3>
+		</section>
+		<section data-background="#F5F6F6">
+				<img src="images/grunt-logo.png" class="no-markup" alt="" />
+			<aside class="notes">
+				Je hebt ook Gulp, ga ik niet over hebben.<br />
+				Draait op NodeJS.<br />
+				Net als SASS, soort compiler.<br />
+				Kan herhalende taken (en meer) voor je uitvoeren.
+			</aside>
+		</section>
+		<section>
+			<h2>Maak een lijst van je taken</h2>
+
+			<ul>
+				<li class="fragment">
+					JavaScript bestanden samenvoegen
+				</li>
+				<li class="fragment">
+					JSHint
+				</li>
+				<li class="fragment">
+					Tests uitvoeren
+				</li>
+				<li class="fragment">
+					Debug logging verwijderen
+				</li>
+				<li class="fragment">
+					Uitkomst uglifyen
+				</li>
+			</ul>
+		</section>
+		<section>
+			<h3>Wanneer voer je de taken uit?</h3>
+
+			<ul>
+				<li>
+					Tijdens development: <span class="fragment">(bij elke verandering in de source)</span>
+					<ul>
+						<li class="fragment">JavaScript bestanden samenvoegen</li>
+						<li class="fragment">JSHint</li>
+						<li class="fragment">Tests uitvoeren</li>
+					</ul><br />
+				</li>
+				<li class="fragment">
+					Bij build:
+					<ul>
+						<li class="fragment">JavaScript bestanden samenvoegen</li>
+						<li class="fragment">JSHint</li>
+						<li class="fragment">Tests uitvoeren</li>
+						<li class="fragment">Debug logging verwijderen</li>
+						<li class="fragment">Uitkomst uglifyen</li>
+					</ul>
+				</li>
+			</ul>
+			<aside class="notes">
+				Watch net als SASS.<br />
+				Deploy zou je zelfs kunnen doen.
+			</aside>
+		</section>
+		<section>
+			<h3>En dit kan allemaal automatisch?</h3>
+			<h1 class="fragment">Ja.</h1>
+		</section>
+		<section data-background="images/crying.gif">
+			<!--It's so beautiful-->
+		</section>
+		<section>
+			<h2>Stap 1: Installeer NodeJS</h2>
+
+			<div>
+				<a href="http://nodejs.org/download/">http://nodejs.org/download/</a>
+			</div>
+		</section>
+		<section>
+			<h2>Stap 2: Installeer Grunt CLI</h2>
+
+			<pre><code data-trim class="language-bash large">
+$ npm install -g grunt-cli
+			</code></pre>
+		</section>
+		<section>
+			<h1>Wat doet NPM?</h1>
+		</section>
+		<section>
+			<h2>package.json</h2>
+			<pre><code data-trim class="language-javascript large">
+{
+	"name": "project-name",
+	"version": "1.3.37",
+	"description": "Een voorbeeld van een project",
+	"main": "",
+	"scripts": {
+		"test": "grunt test"
+	},
+	"author": "Gaya Kessler",
+	"license": "MIT",
+	"devDependencies": {
+		"grunt": "~0.4.2"
+	}
+}
+			</code></pre>
+		</section>
+		<section>
+			<h2>Grunt toevoegen aan je project</h2>
+			<pre><code data-trim class="language-javascript large">
+$ npm install grunt --save-dev
+			</code></pre>
+		</section>
+
+		<section>
+			<h2>We hebben nodig</h2>
+			<ul>
+				<li class="fragment">Bestanden in de gaten houden</li>
+				<li class="fragment">Bestanden samenvoegen</li>
+				<li class="fragment">JSHint uitvoeren</li>
+				<li class="fragment">Tests uitvoeren</li>
+				<li class="fragment">Console.log's verwijderen</li>
+				<li class="fragment">Uitkomst "lelijk" maken</li>
+			</ul>
+		</section>
+		<section>
+			<h2>Grunt plugins zoeken</h2>
+			<p>
+				<a href="http://gruntjs.com/plugins">http://gruntjs.com/plugins</a>
+			</p>
+		</section>
+		<section>
+			<h2>We hebben nodig</h2>
+			<ul>
+				<li>Bestanden in de gaten houden <span style="color: #00ff18">&gt; grunt-contrib-watch</span></li>
+				<li>Bestanden samenvoegen <span style="color: #00ff18">&gt; grunt-contrib-concat</span></li>
+				<li>JSHint uitvoeren <span style="color: #00ff18">&gt; grunt-contrib-jshint</span></li>
+				<li>Tests uitvoeren <span style="color: #00ff18">&gt; grunt-contrib-qunit</span></li>
+				<li>Console.log's verwijderen <span style="color: #00ff18">&gt; grunt-remove-logging</span></li>
+				<li>Uitkomst "lelijk" maken <span style="color: #00ff18">&gt; grunt-contrib-uglify</span></li>
+			</ul>
+		</section>
+		<section>
+			<h4>Grunt demo</h4>
+		</section>
+		<section>
+			<h2>En hoe nu verder?</h2>
+		</section>
+		<section data-background="#F5F6F6">
+			<img src="images/yeoman-horizontal.gif" class="no-markup" alt="" />
+		</section>
+		<section>
+			<h2>Wat kan Yeoman voor mij doen?</h2>
+			<ul>
+				<li>
+					Project scaffolding
+				</li>
+				<li>
+					Neemt projecten opzetten uit handen
+				</li>
+                <li>
+                    Automatisatie automatiseren
+                </li>
+			</ul>
+		</section>
+		<section>
+			<h2>Yeoman generators</h2>
+			<ul>
+				<li class="fragment">
+					Zet een vagrant box klaar voor testing.
+				</li>
+				<li class="fragment">
+					Grunt configuratie voor dist en build taken.
+				</li>
+				<li class="fragment">
+					Standaard Sass indeling en mixins en libs.
+				</li>
+				<li class="fragment">
+					Laatste versie van platform waar ik mee wil werken.
+				</li>
+				<li class="fragment">
+					Geen configs meer aanpassen, het werkt gewoon meteen.
+				</li>
+			</ul>
+		</section>
+		<section data-background="images/jp.gif">
+			<!--DON'T SUE ME SPIELBERG-->
+		</section>
+		<section>
+			<h2>Bedankt voor jullie aandacht</h2>
+
+			<h1>Vragen?</h1>
+
+			<p>
+				Blog: <a href="http://www.gayadesign.com">http://www.gayadesign.com</a>
+			</p>
+			<p>
+				Slides: <a href="http://talk.gayadesign.com">http://talk.gayadesign.com</a>
+			</p>
+			<p>
+				Twitter: <a href="http://www.twitter.com/gayadesign">@gayadesign</a>
+			</p>
+		</section>
+	</div>
+
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.min.js"></script>
+
+<script>
+
+	// Full list of configuration options available here:
+	// https://github.com/hakimel/reveal.js#configuration
+	Reveal.initialize({
+		controls: true,
+		progress: true,
+		history : true,
+		center  : true,
+		parallaxBackgroundImage: 'images/bg-pattern.png',
+		transitionSpeed: "fast",
+
+		theme       : Reveal.getQueryHash().theme, // available themes are in /css/theme
+		transition  : Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+		// Parallax scrolling
+		// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+		// parallaxBackgroundSize: '2100px 900px',
+
+		// Optional libraries used to extend on reveal.js
+		dependencies: [
+			{ src: 'lib/js/classList.js', condition: function () {
+				return !document.body.classList;
+			} },
+			{ src: 'plugin/markdown/marked.js', condition: function () {
+				return !!document.querySelector('[data-markdown]');
+			} },
+			{ src: 'plugin/markdown/markdown.js', condition: function () {
+				return !!document.querySelector('[data-markdown]');
+			} },
+			{ src: 'plugin/prismjs/prism.js', async: true, callback: function () {
+				Prism.highlightAll();
+			} },
+			{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function () {
+				return !!document.body.classList;
+			} },
+			{ src: 'plugin/notes/notes.js', async: true, condition: function () {
+				return !!document.body.classList;
+			} }
+		]
+	});
+
+</script>
+
+</body>
+</html>

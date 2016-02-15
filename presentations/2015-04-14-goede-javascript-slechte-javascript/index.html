@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>Goede JavaScript, Slechte JavaScript. WP Meetup Tilburg, Gaya Kessler</title>
+
+        <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+        <meta name="author" content="Hakim El Hattab">
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="stylesheet" href="css/reveal.min.css">
+        <link rel="stylesheet" href="css/theme/moon.css" id="theme">
+
+        <!-- For syntax highlighting -->
+        <!--<link rel="stylesheet" href="lib/css/zenburn.css">-->
+        <link rel="stylesheet" href="plugin/prismjs/prism.css">
+
+        <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+        <script>
+            if( window.location.search.match( /print-pdf/gi ) ) {
+                var link = document.createElement( 'link' );
+                link.rel = 'stylesheet';
+                link.type = 'text/css';
+                link.href = 'css/print/pdf.css';
+                document.getElementsByTagName( 'head' )[0].appendChild( link );
+            }
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="reveal">
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+                <section>
+                    <img src="images/gjssjs.png" alt=""/>
+                    <p>
+                        <br />Door <a href="http://gaya.ninja">Gaya Kessler</a> / <a href="https://twitter.com/GayaNinja">@GayaNinja</a>
+                    </p>
+                </section>
+
+                <section>
+                    <h1>Gaya Kessler</h1>
+
+                    <h2>JavaScript Developer</h2>
+                    <h3>Blue Mango</h3>
+
+                    <p>
+                        <br />Site: <a href="http://gaya.ninja">http://gaya.ninja</a>
+                    </p>
+                    <p>
+                        Blog: <a href="http://blog.gaya.ninja">http://blog.gaya.ninja</a>
+                    </p>
+                    <p>
+                        Twitter: <a href="https://www.twitter.com/gayaninja">@GayaNinja</a>
+                    </p>
+                </section>
+
+                <section>
+                    <h1>JavaScript is meer</h1>
+                    <h2>dan een jQuery scriptje</h2>
+                </section>
+                
+                <section>
+                    <h3>Kleine greep uit mijn</h3>
+                    <h1>Ervaring</h1>
+                </section>
+
+                <section>
+                    <h2>In deze presentatie:</h2>
+                    <br />
+                    <ul>
+                        <li class="fragment">Wat is <code>this</code>?<br /><br /></li>
+                        <li class="fragment">Async vs. Sync<br /><br /></li>
+                        <li class="fragment">Prototypical Inheritance<br /><br /></li>
+                        <li class="fragment">Isomorphic JS en Browserify</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>De beste tip ooit.</h3>
+                    <h2 class="fragment">Leer geen framework,<br />leer JavaScript.</h2>
+                </section>
+
+                <section>
+                    <h2>Wat is</h2>
+                    <h1><code>this</code>?</h1>
+                </section>
+
+                <section>
+                    <pre><code class="language-javascript">var obj = {
+    name: "Barry",
+
+    bar: function () {
+        console.log(this.name);
+    }
+}
+
+obj.bar(); //Barry
+
+setTimeout(obj.bar, 10); //Storage</code></pre>
+                </section>
+
+                <section>
+                    <h1>Huh?</h1>
+                </section>
+
+                <section>
+                    <pre><code class="language-javascript">obj //<-- call-site for obj.bar()
+    .bar();
+
+setTimeout(obj.bar, 10); //not the call-site for obj.bar()
+
+//passes function obj.bar, not the object
+function setTimeOutCallback(callback) {
+    callback(); //<-- call-site for obj.bar()
+}</code></pre>
+                </section>
+
+                <section>
+                    <h1>En <code>function</code>?</h1>
+                </section>
+
+                <section>
+                    <pre><code class="language-javascript">function Foo() {
+    this.count++;
+}
+
+Foo.count = 0;
+
+Foo();
+Foo();
+Foo();
+
+console.log(Foo.count); //0</code></pre>
+                </section>
+
+                <section>
+                    <pre><code class="language-javascript">function Foo() {
+    this.count++;
+}
+
+Foo(); // <-- call-site for Foo() is `Window`</code></pre>
+                </section>
+
+                <section>
+                    <h1><code>.bind()</code> is de oplossing</h1>
+
+                    <h3>Vergeet <code>var that = this;</code></h3>
+                </section>
+
+                <section>
+                    <pre><code class="language-javascript">var obj = {
+    name: "Barry",
+
+    bar: function () {
+        console.log(this.name);
+    }
+}
+
+obj.bar(); //Barry
+
+setTimeout(obj.bar.bind(obj), 10); //Barry</code></pre>
+                </section>
+
+                <section>
+                    <pre><code class="language-javascript">function Foo() {
+    this.count++;
+}
+
+Foo.count = 0;
+
+Foo.call(Foo);
+Foo.call(Foo);
+Foo.call(Foo);
+
+console.log(Foo.count); //3</code></pre>
+                </section>
+
+                <section>
+                    <h2>Async vs. Sync</h2>
+                </section>
+
+                <section>
+                    <pre><code class="language-javascript">var newUser = User();
+
+newUser.name = getName(); //Ad
+newUser.town = getTown(); //Universe
+newUser.age = getAge(); //42
+
+[...]
+
+newUser.save();</code></pre>
+                </section>
+
+                <section>
+                    <pre><code class="language-javascript">var newUser = User();
+
+getName(function handleName(name) {
+    newUser.name = name; });
+
+getTown(function gotTown(town) {
+    newUser.town = town; });
+
+getAge(function gotAge(age) {
+    newUser.age = age; });
+
+console.log(newUser.name, newUser.town, newUser.age);
+    //undefined undefined undefined</code></pre>
+                </section>
+
+                <section>
+                    <pre><code class="language-javascript">var newUser = User();
+
+getName(function handleName(name) {
+    newUser.name = name;
+    getTown(function handleTown(town) {
+        newUser.town = town;
+        getAge(function handleAge(age) {
+            newUser.age = age;
+            newUser.save();
+        });
+    });
+});</code></pre>
+                </section>
+
+                <section>
+                    <h1>Yuck.</h1>
+                </section>
+
+                <section>
+                    <pre><code class="language-javascript">var newUser = User();
+getName(handleName);
+
+function handleName(name) {
+    newUser.name = name; getTown(handleTown); }
+
+function handleTown(town) {
+    newUser.town = town; getAge(handleAge); }
+
+function handleAge(age) {
+    newUser.age = age; newUser.save(); }</code></pre>
+                </section>
+
+                <section>
+                    <h1>Prototypical<br />Inheritance</h1>
+                    <h3>vs. Classical Inheritance</h3>
+                </section>
+
+                <section>
+                    <h2>"JavaScript is niet OO"</h2>
+                </section>
+
+                <section>
+                    <img src="images/classical.png" alt=""/>
+                </section>
+
+                <section>
+                    <img src="images/prototypical.png" alt=""/>
+                </section>
+
+                <section>
+                    <h3>"Favor 'object composition' over 'class inheritance'."</h3>
+                    <h3>Gang of Four, 1995</h3>
+                </section>
+
+                <section>
+                    <h2>Een <code>class</code> is slechts een blauwdruk.</h2>
+                </section>
+
+                <section>
+                    <h2>Leen methodes van andere objecten</h2>
+                </section>
+
+                <section>
+                    <pre><code class="language-javascript">var Foo = {
+    name: "Barry",
+    bar: function () {
+        console.log(this.name); }
+}
+
+var Loel = {
+    name: "Ad",
+    all: Foo.bar
+}
+
+Loel.all(); //Ad</code></pre>
+                </section>
+
+                <section>
+                    <h2>Export factory's in plaats van constructors</h2>
+                </section>
+                
+                <section>
+                    <pre><code>/CoolStuff/
+    index.js
+    logic.js
+/Other/
+    index.js
+index.js</code></pre>
+                </section>
+
+                <section>
+                    <pre><code class="language-javascript">var CoolStuff = { ... }
+
+module.exports = function () {
+    var newObject = Object.create(CoolStuff);
+
+    newObject.iets = "Iets";
+    newObject.method();
+
+    return newObject;
+}</code></pre>
+                </section>
+                
+                <section>
+                    <pre><code class="language-javascript">var CoolStuff = require("./CoolStuff/");
+
+CoolStuff(); //instant throw away
+var stuff = CoolStuff(); //keep in object</code></pre>
+                </section>
+
+                <section>
+                    <h1>Isomorphic JS</h1>
+                    <h2>&amp; Browserify</h2>
+                </section>
+
+                <section>
+                    <h2>Zelfde code, op server en browser.</h2>
+                </section>
+
+                <section>
+                    <h2>"Normale" stack:</h2>
+                    <br />
+                    <h4>Server:</h4>
+                    <p>PHP / JSP / .NET / Ruby</p>
+                    <br />
+                    <h4>Browser:</h4>
+                    <p>HTML, CSS, JavaScript</p>
+                </section>
+
+                <section>
+                    <h2>JavaScript stack:</h2>
+                    <br />
+                    <h4>Server:</h4>
+                    <p>JavaScript (Node.js, io.js)</p>
+                    <br />
+                    <h4>Browser:</h4>
+                    <p>HTML, CSS, JavaScript</p>
+                </section>
+
+                <section>
+                    <h2>We herhalen concepten</h2>
+                </section>
+
+                <section>
+                    <h2>Stel je voor: Objecten in front- en backend met gelijke code.</h2>
+                </section>
+
+                <section>
+                    <h2>Node.js functionaliteit in de browser?</h2>
+                </section>
+
+                <section>
+                    <img src="images/browserify.png" alt=""/>
+                </section>
+
+                <section>
+                    <ul>
+                        <li>Gebruik van <code>require</code><br /><br /></li>
+                        <li>Bundelt ook npm modules<br /><br /></li>
+                        <li>ES6+ ondersteuning met <a href="https://github.com/babel/babelify">Babelify</a></li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Verder lezen</h2>
+                    <a href="http://www.amazon.com/Professional-JavaScript-Developers-Nicholas-Zakas/dp/1118026691">Professional JavaScript for Web Developers</a><br />Nicholas C. Zakas<br /><br />
+                    <a href="https://github.com/getify/You-Dont-Know-JS">You Don't Know JS</a><br />Kyle Simpson<br /><br />
+                    <a href="https://medium.com/javascript-scene/the-two-pillars-of-javascript-ee6f3281e7f3">The Two Pillars of JavaScript</a><br />Eric Elliott<br /><br />
+                </section>
+
+                <section>
+                    <h1>Bedankt!</h1>
+                    <br />
+                    <h2>Gaya Kessler</h2><br />
+                    <h3><a href="http://twitter.com/gayaninja">@GayaNinja</a></h3>
+                    <h3><a href="http://gaya.ninja">http://gaya.ninja</a></h3>
+                </section>
+            </div>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.min.js"></script>
+
+        <script>
+
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+                parallaxBackgroundImage: 'images/bg-pattern.png',
+                transitionSpeed: "fast",
+
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+                // Parallax scrolling
+                // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+                // parallaxBackgroundSize: '2100px 900px',
+
+                // Optional libraries used to extend on reveal.js
+                dependencies: [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/prismjs/prism.js', async: true, callback: function () { Prism.highlightAll(); } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+                ]
+            });
+
+        </script>
+
+<<<<<<< HEAD
+    </body>
+=======
+	</body>
+>>>>>>> fd2532a2f09a151b6572476352d606c3fecfd947
+</html>

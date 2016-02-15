@@ -1,0 +1,92 @@
+#######################################################
+#			SPRITES								      #
+#######################################################
+
+$ compass watch
+
+@import "compass/utilities/sprites";
+@import "silk-icons/*.png";
+
+.add-button {
+	@include silk-icons-sprite("add");
+}
+
+.cross-button {
+	@include silk-icons-sprite("cross");
+}
+
+#######################################################
+#          Grunt install						      #
+#######################################################
+
+$ npm init
+$ npm install grunt --save-dev
+$ cat package.json
+
+$ npm install grunt-contrib-watch --save-dev
+$ npm install grunt-contrib-concat --save-dev
+
+$ cp src/temp/Gruntfile.js Gruntfile.js
+
+//NPM TASKS PLAATSEN
+grunt.loadNpmTasks('grunt-contrib-watch');
+grunt.loadNpmTasks('grunt-contrib-concat');
+
+//REGISTER TASKS DIE MOETEN GAAN BESTAAN
+grunt.registerTask('build', ['']);
+
+//Watch opties
+watch: {
+	js: {
+		files: ['src/**/*.js'],
+		tasks: ['concat:js']
+	}
+},
+
+//concat
+concat: {
+	options: {
+		separator: '\n',
+		banner: "",
+		footer: ""
+	},
+	js: {
+		src: [
+			'src/js/**/!(<%= pkg.name %>).js',
+			'src/js/**/<%= pkg.name %>.js'
+		],
+		dest: 'dist/js/<%= pkg.name %>.js'
+	}
+}
+
+$ cp src/temp/index.html index.html
+$ grunt watch:js
+
+//grunt-test.js
+var barry = new Animal('Barry');
+barry.walk();
+
+//ZONDER WATCH
+$ grunt concat:js
+
+$ npm install grunt-contrib-uglify --save-dev
+
+//ADD TASK
+grunt.loadNpmTasks('grunt-contrib-uglify');
+
+grunt.registerTask('build', ['concat:js', 'uglify:js'])
+
+//uglify
+uglify: {
+	options: {
+		banner: ""
+	},
+	build: {
+		src: 'dist/js/<%= pkg.name %>.js',
+		dest: 'build/js/<%= pkg.name %>.min.js'
+	}
+}
+
+$ grunt build
+
+#########
