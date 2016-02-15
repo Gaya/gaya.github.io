@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>Gaya Design</title>
+		<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1' />
+		<link href='http://www.gayadesign.com/scripts/smokeeffect/css/style.css' rel='stylesheet' type='text/css' />
+		<link href='css/interaction.css' rel='stylesheet' type='text/css' />
+		
+		<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js'></script>
+		<script type='text/javascript' src='js/interaction.js'></script>
+		<script type='text/javascript' src='js/actions.js'></script>
+	</head>
+	
+	<body>
+		<div style='padding: 15px;'>
+		
+			<div class='content'>
+				
+				<h1>InterAction</h1>
+				
+				<p>
+					An example of what you can do with the InterAction script.<br />
+					Click on the plants to test out the menu and perform actions.
+				</p>
+				
+				<p>
+					Plants die in 10 seconds, unless you water them.<br />
+					When they die you can choose to either plant a new one or throw it away.
+				</p>
+				
+				<div class='garden'>
+					<img id="plant1" src='images/flower.png' alt='' />
+					<img id="plant2" src='images/flower_dead.png' alt='' />
+				</div>
+				
+				<script>
+					var normalPlant = Array(
+						Array("Water plant", function() { Actions.waterPlant(); }),
+						Array("Hit plant", function() { Actions.hitPlant(); }),
+						Array("Talk to plant", function() { Actions.talkToPlant(); })
+					);
+
+					var deadPlant = Array(
+						Array("Throw away dead plant", function() { Actions.throwAway() }),
+						Array("Plant a new plant", function() { Actions.plantNew() })
+					);
+				
+					InterAction.init("#plant1", normalPlant);
+					InterAction.init("#plant2",	deadPlant);
+
+					Actions.dieTime.push(Array("#plant1", 100));
+				</script>
+				
+				<p>
+					<a href="interaction.zip">Download</a><br />
+					<a href="http://www.gayadesign.com/diy/circular-interaction-menu/">Read the post</a>
+				</p>
+			</div>
+		</div>
+	</body>
+</html>

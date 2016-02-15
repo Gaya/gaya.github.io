@@ -1,0 +1,42 @@
+body {
+	font-size: 10px;
+	font-family: verdana,sans-serif;
+	background-color: black;
+	color: white;
+	padding: 0px;
+	margin: 0px;
+}
+
+.content {
+	width: 1000px;
+	margin: 0px auto;
+	background-color: black;
+	padding: 20px;
+}
+
+h1 {
+	color:white;
+	font-weight:normal;
+	text-decoration:none;
+}
+
+#adamoSlider {
+	background-image: url(../images/amadobg.gif);
+	background-repeat: repeat-x;
+	background-color: #fdfdfd;
+	width: 1000px;
+	height: 630px;
+	overflow: hidden;
+}
+
+#overflow {
+	overflow: hidden;
+	width: 10000px;
+}
+
+#adamoSlider .item {
+	width: 250px;
+	background-position: top center;
+	height: 630px;
+	float: left;
+}

@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="nl" lang="nl">
+<head>
+    <title>Gaya Design - Spritely</title>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	
+	<link href="css/style.css" type="text/css" rel="stylesheet">
+	
+	<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'></script>
+	<script type='text/javascript' src='js/jquery-ui-1.8.1.custom.min.js'></script>
+	<script type='text/javascript' src='js/jquery.spritely-0.2.1.js'></script>
+	
+	<script type='text/javascript'>
+		$(document).ready(function () {
+			//init yoshi
+			$('#yoshi').sprite({fps: 2, no_of_frames: 4});
+			$('#yoshi').spState(3);
+
+			$('#landscape').pan({fps: 20, speed: 4, dir: 'left'});
+			$('#ground').pan({fps: 20, speed: 6, dir: 'left'});
+			
+			$('#landscape').spStop();
+			$('#ground').spStop();
+			
+			$('#logo').delay(2000).animate({
+				top: "160px",
+				left: '220px'
+			}, {
+				duration: 2000, 
+				specialEasing: {
+				  left: 'linear',
+				  top: 'easeOutBounce'
+				}
+			});
+			
+			$(document).bind('keydown', function(e) {
+				move_yoshi(e.keyCode);
+			});
+			$(document).bind('keyup', function() {
+				stop_yoshi();
+			});
+
+			setInterval ("move_cycle()", 50);
+		});
+
+		function move_cycle() {
+			//yoshi movement
+			if (yoshi_state.moving == true) {
+
+				if (yoshi_state.dir == "right") {
+					var left = yoshi_state.xPos;
+
+					if (left < 376) {
+
+						$('#yoshi').stop().animate({
+							"left": (left + 10) + "px"
+						}, 50, "linear");
+						
+					} else {
+
+						if (yoshi_state.panning == false) {
+							
+							$('#landscape').spChangeDir("left");
+							$('#ground').spChangeDir("left");
+
+							$('#landscape').spStart();
+							$('#ground').spStart();
+
+							yoshi_state.panning = true;
+						}
+						
+					}
+
+					yoshi_state.xPos = yoshi_state.xPos + 10;
+
+				} else if (yoshi_state.dir == "left") {
+					var left = yoshi_state.xPos;
+
+					if (left < 376) {
+						
+						if (yoshi_state.panning == true) {
+							$('#landscape').spStop();
+							$('#ground').spStop();
+
+							yoshi_state.panning = false;
+						}
+
+						if (left > 0) {
+							$('#yoshi').stop().animate({
+								"left": (left - 10) + "px"
+							}, 50, "linear");
+						}
+
+					} else {
+						
+						if (yoshi_state.panning == false) {
+							
+							$('#landscape').spChangeDir("right");
+							$('#ground').spChangeDir("right");
+
+							$('#landscape').spStart();
+							$('#ground').spStart();
+
+							yoshi_state.panning = true;
+						}
+						
+					}
+					
+					yoshi_state.xPos = yoshi_state.xPos - 10;
+
+					if (yoshi_state.xPos < 0) {
+						yoshi_state.xPos = 0;
+					}
+				}
+				
+			}
+		}
+		
+		var yoshi_state = {
+			dir: "right",
+			moving: false,
+			panning: false,
+			xPos: 20
+		};
+		
+		function move_yoshi(keycode) {
+			if (keycode == 39) {
+				if (yoshi_state.moving == false) {
+					yoshi_state.dir = "right"
+					$('#yoshi').spState(1).fps(10);
+					yoshi_state.moving = true;
+				}
+			} else if (keycode == 37) {
+				if (yoshi_state.moving == false) {
+					yoshi_state.dir = "left"
+					$('#yoshi').spState(2).fps(10);
+					yoshi_state.moving = true;
+				}
+			}
+		}
+		
+		function stop_yoshi() {
+			yoshi_state.moving = false;
+			yoshi_state.panning = false;
+			
+			$('#landscape').spStop();
+			$('#ground').spStop();
+			
+			$('#yoshi').fps(2);
+			
+			if (yoshi_state.dir == "right") {
+				$('#yoshi').spState(3);
+			} else {
+				$('#yoshi').spState(4);
+			}
+		}
+		
+		function yoshi_walk() {
+			$('#yoshi').spState(1);
+			$("#landscape").spChangeDir('left');
+			$("#ground").spChangeDir('left');
+			
+			$('#yoshi').animate({
+				left: "652px"
+			}, 15000, "linear", function() {
+				$(this).spState(2);
+				
+				$("#landscape").spChangeDir('right');
+				$("#ground").spChangeDir('right');
+				
+				$(this).animate({
+					left: "20px"
+				}, 15000, "linear", function () { yoshi_walk(); });
+			});
+		}
+	</script>
+</head>
+
+<body>
+	<div id='landscape'>
+		<div id='yoshi'>
+			
+		</div>
+		<div id='ground'>
+			
+		</div>
+		<div id='logo'>
+			
+		</div>
+	</div>
+</body>
+
+</html>

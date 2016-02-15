@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>Gaya Design - jQuery PhotoNav</title>
+		<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1' />
+		<link href='css/style.css' rel='stylesheet' type='text/css' />
+		<script src="js/jquery-1.3.2.min.js" type="text/javascript"></script>
+		
+		<script src="js/examples.js" type="text/javascript"></script>
+		
+		<script src="js/photonavjQuery.js" type="text/javascript"></script>
+		<link href='css/photonav.css' rel='stylesheet' type='text/css' />
+	</head>
+	
+	<body>
+		<div style='padding: 15px;'>
+		
+			<div class='content'>
+				
+				<h1>jQuery version of PhotoNav Showcase</h1>
+				
+				<p>
+					This page shows the functionality of the PhotoNav script now in jQuery.
+				</p> 
+				
+				<h2>Example:</h2>
+				
+				<div id='photonav' class='photonav'>
+					<span class='example' onclick='startExample(1)'>Menu navigation example</span><br />
+					<span class='example' onclick='startExample(2)'>Panorama photo example</span><br />
+					<span class='example' onclick='startExample(4)'>Menu navigation debug example (slow)</span><br />
+					
+					<div class='photo' style='display: none;' id='navigate'>
+						<div class='fixed opt1'>
+							<a href='http://gayadesign.com/' class='button1'>
+								
+							</a>
+							<a href='http://gayadesign.com/portfolio/' class='button2'>
+								
+							</a>
+							<a href='http://gayadesign.com/about/' class='button3'>
+								
+							</a>
+							<a href='http://gayadesign.com/partners/' class='button4'>
+								
+							</a>
+							<a href='http://gayadesign.com/contact/' class='button5'>
+								
+							</a>
+						</div>
+					</div>
+					<div class='photo' style='display: none;' id='navigate2'>
+						<div class='fixed opt2'>
+							
+						</div>
+					</div>
+					
+					<br /><br />
+					
+					<div>
+						<strong>Debug info:</strong><br />
+						<div id='status'>
+							&nbsp;
+						</div>
+					</div>
+					
+					<script type='text/javascript'>
+						startExample(2);
+					</script>
+				</div>
+				<br style='clear: both' />
+				<br />
+				
+				<a href='jqueryphotonav.zip'>Download</a><br />
+				<a href='http://www.gayadesign.com/diy/jquery-convertion-panoramic-photoviewer-in-javascript/'>Read the post</a>
+				
+			</div>
+			
+		</div>
+	</body>
+</html>

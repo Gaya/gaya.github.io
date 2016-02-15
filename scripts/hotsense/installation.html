@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+	<head>
+		<title>
+			HotSense - Stopping hotlinks - by gaya kessler
+		</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<link href="css/stylesheet.css" rel="stylesheet" type="text/css" />
+	</head>
+
+	<body>
+	
+		<div class='content'>
+			<h1>
+				<em>HotSense</em>
+				&#8220;Stops the hotlinking<br />
+				&nbsp;of your images with<br />
+				&nbsp;a build-in delay.&#8221;
+			</h1>
+			
+			<div class='menu'>
+				<div class="roundedcornr_box_352701">
+					<div class="roundedcornr_content_352701">
+						<a href='index.html'>what is it?</a>
+					</div>
+					<div class="roundedcornr_bottom_352701"><div></div></div>
+				</div>
+				
+				<div class="roundedcornr_box_352701">
+					<div class="roundedcornr_content_352701">
+						<a href='installation.html'>installation</a>
+					</div>
+					<div class="roundedcornr_bottom_352701"><div></div></div>
+				</div>
+				
+				<div class="roundedcornr_box_352701">
+					<div class="roundedcornr_content_352701">
+						<a href='download.html'>download</a>
+					</div>
+					<div class="roundedcornr_bottom_352701"><div></div></div>
+				</div>
+				
+				<div class="roundedcornr_box_352701">
+					<div class="roundedcornr_content_352701">
+						<a href='http://www.gayadesign.nl'>gayadesign.nl</a>
+					</div>
+					<div class="roundedcornr_bottom_352701"><div></div></div>
+				</div>
+				
+				<div class="roundedcornr_box_352701">
+					<div class="roundedcornr_content_352701">
+						<a href='http://obsceneflower.gayadesign.nl'>obscene flower</a>
+					</div>
+					<div class="roundedcornr_bottom_352701"><div></div></div>
+				</div>
+			</div>
+			
+			<div id='main_content'>
+				<h2>Installation</h2>
+				Installing and configuring HotSense is fairly easy for most webmasters.<br />
+				I'll explain step-by-step:<br />
+				<br />				
+				<h2>Step 1</h2>
+				Download the package from the download folder and extract it in a local folder.<br />
+				<br />
+				<h2>Step 2</h2>
+				Open this file in a text editor: <em>.htaccess</em>
+				<p class='code'>
+					RewriteEngine On<br />
+					RewriteCond %{HTTP_REFERER} !^http://(\www\.)?<strong>yourdomain</strong>\.<strong>com</strong>/ [NC]<br />
+					RewriteCond %{HTTP_REFERER} !^$<br />
+					RewriteCond %{REQUEST_FILENAME} .*jpeg$|.*jpg$|.*JPEG$|.*JPG$ [NC]<br />
+					RewriteRule .*\.(gif|jpg|jpeg|bmp)$ http://<strong>www.yourdomain.com</strong>/hotsense/hotlink.php?site=<strong>http://www.yourdomain.com</strong>&amp;img=%{REQUEST_URI} [R,NC]
+				</p>
+				I've made everything you should edit <strong>bold</strong>.<br />
+				<br />
+				Second row: The domain which has access to your images, you can and more by copying the line filling in another domain.<br />
+				Fifth row: In both cases, it's the domain that will be checked by the script. So it's the same domain as in row 2 (most of the times).<br />
+				<br />
+				<h2>Step 3</h2>
+				It's time to install the database table.<br />
+				Open <em>database_table.sql</em>, copy the text, and execute the sql on the desired database. You can execute SQL with phpMyAdmin, which is most likely installed on your server.<br />
+				<br />
+				<h2>Step 4</h2>
+				Time to change the configure file!<br />
+				<br />
+				The first block is to configure your database connection settings.<br />
+				You can set the image to be shown after a delay at the bottom and delay etc.<br />
+				<br />
+				<h2>Step 5</h2>
+				Upload the configured files of the local folder to your root on your webserver. It's the www of httpdocs folder in most cases.<br />
+				<br />
+				<h2>Step 6</h2>
+				You are finished!<br />
+				You can check statistics on the <em>www.yourdomain.com/hotsense/checker.php</em> page!<br /><br />
+				<strong>HAVE FUN</strong>
+			</div>
+			
+		</div>
+		
+	</body>
+</html>

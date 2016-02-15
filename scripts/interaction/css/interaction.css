@@ -1,0 +1,27 @@
+.ia_box {
+	padding: 5px;
+	padding-left: 20px;
+	border-right: 1px solid black;
+	position: absolute;
+	display: inline;
+	color: white;
+	cursor: pointer;
+	background-image: url(../images/bg_item.png);
+}
+
+.garden {
+	height: 549px;
+	background-image: url(../images/garden.jpg);
+}
+
+#plant1 {
+	position: absolute;
+	margin-top: 273px;
+	margin-left: 120px;
+}
+
+#plant2 {
+	position: absolute;
+	margin-top: 240px;
+	margin-left: 530px;
+}

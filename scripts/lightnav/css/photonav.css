@@ -1,0 +1,12 @@
+#imageContainer {
+	overflow: hidden;
+	padding: 0px;
+}
+
+#outerImageContainer  {
+	background-color: #ffffff;
+}
+
+#imageDataContainer {
+	background-color: #ffffff;
+}

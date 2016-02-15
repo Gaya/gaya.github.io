@@ -1,0 +1,232 @@
+A normal problem: notifications or updates that have to be displayed on a website.
+But as long as the page is open: please update the status dynamically without reloading the page.
+
+I can hear you think: AJAX! This is a sollution, and I'll use AJAX for sure. But there is a little problem when it comes to how up to date you want this notifications to be without overloading the backend of the website.
+
+In this article I'll approach the notifications from another perspective, regulating them in the backend rather then the frontend.
+
+[plaot]
+
+Most of the applications that use AJAX to update the information that is on the screen use a simple request that fire every set amount of time. This doesn't really make the notification instant and can cause the Javascript to make more call than nessesary to the server.
+
+Expanding the interval time of the calls would lessen the requests, but that would take away a bit of the notification functionality don't you think? When there is something to notify; notify me!
+
+With these problems in mind, there might be various solutions. A solution someone told me about got me interested; rather than letting Javascript determine wether to make a call to the server, let the backend do it.
+
+<h3>How it works:</h3>
+But how are we going to make the backend (in this case PHP) say when to update?
+
+The solution is quick and easy: only return information if PHP wants to, and let PHP tell the frontend to reload.
+To make this a bit more clear, I've put out the following work flow:
+
+<ol>
+	<li>Frontend notifies the backend that it wants a request.</li>
+	<li>The backend goes in a loop waiting for information to give to the frontend.</li>
+	<li>If in the meantime information is available: return the results (basically putting the answer on hold until available).</li>
+	<li>The backend gives his answer (if available) and tells the frontend to do another request.</li>
+</ol>
+
+This approach is a bit different from letting Javascript interval the requests and making it load PHP the whole time.
+
+<h3>Getting started:</h3>
+In this example I am going to make a simple page that shows text from a file on the server and changes the text once changes are made on the server.
+
+First we need a bit of code to get everything off the ground.
+
+Start with this super easy HTML:
+
+[html]
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>Notification test</title>
+	
+	<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js?ver=1.3.2'></script>
+	<script type="text/javascript" src="notification/notification.js"></script>
+</head>
+<body>
+	<div id='content'>
+		<h1>Notification test</h1>
+		
+		<p>
+			This example will notify the user when a certain amount of time has passed
+			though AJAX. 
+		</p>
+		
+		<div id='notify'>
+			
+		</div>		
+		
+	</div>
+</body>
+</html>
+[/html]
+
+Nothing too complicated right? I won't go into details what I did here.
+
+We are going to use jQuery for its AJAX functions (which are so convenient and make clean code.)
+
+The next step would be to output information in the <em>#notify</em> element.
+
+<h3>The Javascript code:</h3>
+
+What do we need in the Javascript:
+
+<ul>
+	<li>A function to make a request to the backend.</li>
+	<li>In the callback of the function we need to load the notifications and output them if they exist.</li>
+	<li>When loaded: reload.</li>
+</ul>
+
+Create a folder called "notification" and in that folder create the file: "notification.js".
+
+The basic Javascript I got is:
+
+[js]
+var notification = {
+	
+	request_url: "notification/notification_request.php",
+		
+	do_request: function() {
+		
+	}
+		
+}
+
+notification.do_request();
+[/js]
+
+Notice that I seperated the request URL from the actual AJAX call that will be the next step. I always to this so you can change this URL with ease, without changing all the code.
+
+Now to fill the <em>do_request</em> function, we'll make a post request to the url and expect JSON as its output. Also create a callback function that will be handeling the output given by the backend.
+
+[js]
+do_request: function() {
+	$.post(notification.request_url, {},
+	function(data) {
+		if (typeof(data.updates) != 'undefined') {
+			$("#notify").html(data.updates);
+		}
+		notification.do_request();
+	}, "json");
+}
+[/js]
+
+It requests the file given in the URL. Waits for it. Looks if there are updates in the output and then call the function again (recursive loop.)
+
+That was all the frontend code there is. Pretty small don't you think? That's why we are going to put all the logic in the backend.
+
+<h3>The backend:</h3>
+To make the backend work I created a small (not that great) update condition: if a certain file on the server contains text; output it and empty the file again.
+
+Your updates would probably be stored in a database and marked if the user has received them, but that's up to you.
+
+Create two files in the "notification" folder: "notification_request.php" and "updates.txt". Also make "updates.txt" <em>chmod 777</em> so PHP can edit that file.
+
+The PHP script has to do the following:
+
+<ul>
+	<li>
+		Determine the time the script can be put on hold.
+	</li>
+	<li>
+		Constantly check if there are changes. If there is any, output the result.
+	</li>
+	<li>
+		Wait a short while and check again. If the max time as been reach output an empty result.
+	</li>
+</ul>
+
+The basic code will look like this:
+
+[php]
+<?php
+	
+	//determine the starting time and the max timeout
+
+	//set default response
+	
+	while(/* max time has not been reached */) {
+		
+		//check and determine update
+		
+		//if update is available; output and break script
+		
+		//if not: wait a little and clear the output
+	}
+	
+	//echo the result if there is no update
+
+?>
+[/php]
+
+To determine the maximum excution time of a PHP script you can get this information from the PHP settings using <em>ini_get</em>, which can get a lot of information found in <em>phpinfo()</em>.
+
+The first part of the script would look like this:
+
+[php]
+//determine the starting time and the max timeout
+$start_time = time();
+$max_timeout = ini_get('max_execution_time');
+
+//set default data
+$data = array();
+[/php]
+
+It determines the start time of the request and the maximum time PHP can put the script on hold. Also the default ouput is set (an empty array.)
+
+Next part contains a bit more code:
+
+[php]
+//go into the loop
+while((time() - $start_time) < $max_timeout) {
+	
+	//set the updates available to false
+	$update_available = false;
+	
+	//open the file and get its contents
+	$updates = file_get_contents("updates.txt");
+	
+	//if there is any content, put it in the output
+	if (strlen($updates) > 0) {
+		//set update available
+		$update_available = true;
+		
+		//set updates
+		$data['updates'] = $updates;
+		
+		//empty file
+		file_put_contents("updates.txt", "");
+	}
+	
+	//if there was an update output it and exit the script
+	if ($update_available) {
+		echo json_encode($data);
+		exit();
+	}
+	
+	//go into sleep for a little while and try again
+	sleep(1);
+	flush();
+}
+
+//if there are no updates within the set time: echo the empty result
+echo json_encode($data);
+[/php]
+
+Simply put, this script will return an update once the the file on the server ("updates.txt") has contents and gives this to the frontend.
+If there is no update, it will give the frontend a sign to reload the same script.
+
+The frontend script will output the contents of the file once it has been changed on the server, almost instantaniously!
+
+The following clip will show you this functionality:
+
+[clip!]
+
+<h3>Future:</h3>
+Now it's time to customize the script to meet your needs, not reading a file on the server, but rather getting updates from your database and creating a better output on the frontend side.
+
+I didn't make this too fancy because I only wanted to show you another approach to the problem of pushing notifications to the frontend.
+
+If you have any ideas, suggestions and like to discuss this solution, please comment below.

@@ -1,0 +1,40 @@
+#yoshi {
+	height: 31px;
+	width: 28px;
+	position: absolute;
+	top: 402px;
+	left: 20px;
+	background-image: url(../sprites/yoshi_walk_left.gif);
+	z-index: 2;
+}
+
+#landscape {
+	width: 800px;
+	overflow: hidden;
+	border: 1px solid black;
+	margin: 20px auto;
+	position: relative;
+	height: 480px;
+	background-image: url(../sprites/background_back.gif);
+	background-repeat: repeat-x;
+	background-position: top left;
+}
+
+#ground {
+	width: 800px;
+	background-image: url(../sprites/background_ground.gif);
+	background-repeat: repeat-x;
+	height: 48px;
+	position: absolute;
+	bottom: 0px;
+	z-index: 1;
+}
+
+#logo {
+	height: 122px;
+	width: 360px;
+	top: -122px;
+	background-image: url(../sprites/logo.gif);
+	position: absolute;
+	z-index: 3;
+}

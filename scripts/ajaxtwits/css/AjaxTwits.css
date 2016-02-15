@@ -1,0 +1,31 @@
+#AjaxTwits {
+	background-color: black;
+	list-style: none;
+	list-style-position: inside;
+	width: 300px;
+	padding: 0px;
+	margin: 0px auto;
+	color: white;
+}
+
+#AjaxTwits li {
+	padding: 15px 20px 15px 20px;	
+}
+
+#AjaxTwits li a {
+	color: #33CCFF;
+	text-decoration: none;
+}
+
+#AjaxTwits li a:hover {
+	color: #26A7CF;
+}
+
+#AjaxTwits li img {
+	border: 0px;
+	height: 34px;
+	width: 34px;
+	float: right;
+	margin-left: 10px;
+	margin-bottom: 10px;
+}

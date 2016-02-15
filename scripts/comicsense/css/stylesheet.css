@@ -1,0 +1,28 @@
+body {
+	background-color: #D6D6D6;
+	font: normal 10pt trebuchet ms,verdana,arial,sans-serif;
+}
+
+div.title {
+	font-size: 30pt;
+	color: Gray;
+}
+
+img {
+	border: 0px;
+}
+
+a {
+	color: Black;
+	text-decoration: underline;
+}
+
+a:hover {
+	color: Black;
+	text-decoration: underline;
+}
+
+div.testlink {
+	margin-left: 20px;
+	margin-bottom: 20px;
+}

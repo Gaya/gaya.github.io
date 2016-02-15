@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>Gaya Design - GdAlert</title>
+		<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1' />
+		<link href='css/style.css' rel='stylesheet' type='text/css' />
+		
+		<script src="js/prototype.js" type="text/javascript"></script>
+		<script src="js/scriptaculous.js" type="text/javascript"></script>
+
+		<script src="js/gdAlert.js" type="text/javascript"></script>
+		<link href='css/gdAlert.css' rel='stylesheet' type='text/css' />
+	</head>
+	
+	<body>
+		<div id='alert_message' style='display: none'>
+			<span>
+				
+			</span>
+			<input type='button' value='ok' class='button' onclick='gdAlert.close()' />
+			<br style='clear: both' />
+		</div>
+		<div style='padding: 15px;'>
+		
+			<div class='content'>
+				
+				<h1>GdAlert Showcase</h1>
+				
+				<p>
+					This page shows the functionality of the gdAlert script.
+				</p> 
+				
+				<h2>Example:</h2>
+				
+				
+				<div>
+					Enter a message in the textbox and it will be alerted using alert();<br />
+					<input type='text' style='width: 400px;' name='alertmessage' id='message' value='This is a test message, it will be displayed in a custom made alert box.' />
+					<input type='button' value='alert this message!' onclick='alert(document.getElementById("message").value)' />
+				</div>
+				<br />
+				<br />
+				
+				<a href='gdalert.zip'>Download GdAlert</a><br />
+				<a href='http://gayadesign.com/post/10/'>Read the post</a>
+				
+			</div>
+			
+		</div>
+	</body>
+</html>

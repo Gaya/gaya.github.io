@@ -1,0 +1,123 @@
+body {
+	background-color: #000000;
+	font-family:Verdana,Arial,Helvetica,sans-serif;
+	font-size: 0.9em;
+}
+
+#loading {
+	line-height: 620px;
+	height: 620px;
+	color: white;
+	text-align: center;
+	width: 1000px;
+	z-index: 1000;
+	position: absolute;
+	float: left;
+	background-color: black;
+	background-image: url(../images/loading.gif);
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+}
+
+#pictureLoadContainer {
+	width: 0px;
+	height: 0px;
+	overflow: hidden;	
+}
+
+#debug {
+	color: #FFFFFF;	
+}
+
+#container {
+	width: 1000px;
+	margin: 0px auto;
+}
+
+#container .header {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+#container .header div {
+	float: left;
+	padding-top: 10px;
+	padding-left: 30px;	
+}
+
+#container .header div a {
+	color: #ffffff;
+	text-decoration: none;
+}
+
+#container .header div a:hover {
+	text-decoration: underline;
+}
+
+#container #items {
+	width: 1000px;
+	overflow: hidden;
+	height: 620px;	
+}
+
+#container #items .nav {
+	position: absolute;
+	height: 580px;
+	padding: 20px;
+	line-height: 620px;
+	float: left;
+	cursor: pointer;
+	margin-top: -620px;
+	display: none;
+}
+
+#container #items .left {
+	margin-left: 0px;
+}
+
+#container #items .right {
+	margin-left: 888px;
+}
+
+#container .item {
+	background-position: top center;
+	background-repeat: no-repeat;
+	width: 250px;
+	height: 620px;
+	overflow: hidden;
+	float: left;
+	text-indent: -1000px;
+}
+
+#container .item img {
+	display: block;	
+}
+
+#container #items #overflow {
+	width: 500000px;
+	height: 620px;
+	overflow: visible;
+}
+
+#caption {
+	float: left;
+	height: 55px;
+	width: 1000px;
+	text-indent: 0px;
+}
+
+#caption .background {
+	background-color: #000000;
+	height: 55px;
+	width: 100%;
+}
+
+#captionContent {
+	position: absolute;
+	float: left;
+	padding: 10px;
+	color: #ffffff;
+	margin-top: -55px;
+	text-transform: uppercase;
+	font-size: 2em;
+}

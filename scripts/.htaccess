@@ -1,0 +1,2 @@
+RewriteEngine on
+#RewriteRule ^(.*)\.(rar|zip|pdf)$ /download.php?download_file=scripts/$1.$2 [R,L]

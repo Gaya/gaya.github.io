@@ -1,0 +1,106 @@
+html, body {
+	height: 100%;
+}
+
+body {
+	padding: 0px;
+	margin: 0px;
+	background-color: #ffffff;
+	background-image: url(../images/background.gif);
+	background-position: center;
+	font: 7pt Verdana, Geneva, Arial, Helvetica, sans-serif;
+}
+
+.content {
+	background-color: #ffffff;
+	width: 740px;
+	margin: 10px auto 10px;
+}
+
+h1 {
+	margin: 0px;
+	padding: 0px;
+	padding-left: 500px;
+	padding-top: 30px;
+	background-image: url(../images/logo.gif);
+	background-repeat: no-repeat;
+	background-position: 20px;
+	border-bottom: 1px solid #c9dbec;
+	height: 70px;
+	font-size: 7pt;
+	font-weight: normal;
+}
+
+h1 em {
+	display: none;
+}
+
+h2 {
+	padding: 0px;
+	margin: 0px;
+	margin-bottom: 5px;
+	color: #5B93C6;
+	border-bottom: 2px dashed #5B93C6;
+	font-size: 14pt;
+}
+
+.menu a {
+	color: #000000;
+	text-decoration: none; 
+}
+
+.menu a:hover {
+	color: #484848;
+	text-decoration: none; 
+}
+
+a {
+	color: #000000;
+}
+
+.menu {
+	height: 40px;
+}
+
+.code {
+	margin: 5px;
+	background-color: #DBDBDB;
+	color: #000000;
+	font-family: monospace;
+	padding: 5px;
+	font-size: 9pt;
+	border: 1px solid #000000;
+}
+
+#main_content {
+	padding: 20px;
+	padding-top: 0px;
+}
+
+.roundedcornr_box_352701 {
+   background: #c9dbec;
+	margin-left: 5px;
+	margin-right: 5px;
+	width: 100px;
+	float: left;
+}
+
+.roundedcornr_bottom_352701 div {
+   background: url(roundedcornr_352701_bl.png) no-repeat bottom left;
+}
+.roundedcornr_bottom_352701 {
+   background: url(roundedcornr_352701_br.png) no-repeat bottom right;
+}
+
+.roundedcornr_top_352701 div, .roundedcornr_top_352701, 
+.roundedcornr_bottom_352701 div, .roundedcornr_bottom_352701 {
+   height: 10px;
+   font-size: 1px;
+}
+
+.roundedcornr_content_352701 {
+	margin: 0px;
+	padding-top: 5px;
+	font-size: 7pt;
+	text-align: center;
+}

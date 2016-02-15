@@ -1,0 +1,57 @@
+.userInfo {
+   float: left;
+   width: 400px;
+   border: 1px solid black;
+   padding: 10px;
+   margin-right: 20px;   
+}
+
+.userInfo .avatar {
+   float: left;
+   display: block;
+   margin: 0px 20px 20px 0px;
+   padding: 5px;
+   border: 1px solid #666;
+   background-color: #ddd;
+}
+
+.userInfo h2 {
+   margin: 0px;   
+}
+
+.artist {
+   height: 100px;
+   background-position: 0px 50%;
+   background-repeat: no-repeat;
+   line-height: 100px;
+   padding: 0px 20px 20px 146px;
+   float: left;
+}
+
+form label {
+   height: 22px;
+   line-height: 22px;
+   width: 160px;
+   padding-right: 15px;
+   text-align: right;
+   float: left;   
+   margin-bottom: 5px;
+}
+
+form input {
+   height: 16px;
+   padding: 2px;
+   border: 1px solid black;  
+}
+
+form br {
+   clear: left;   
+}
+
+form button {
+   margin-left: 175px;   
+}
+
+.event h3 {
+   margin: 0px;   
+}

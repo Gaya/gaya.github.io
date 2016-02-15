@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>Notification test</title>
+	
+	<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js?ver=1.3.2'></script>
+	<script type="text/javascript" src="notification/notification.js"></script>
+</head>
+<body>
+	<div id='content'>
+		<h1>Notification test</h1>
+		
+		<p>
+			This example will notify the user when changes have been made to updates.txt.
+		</p>
+		
+		<div id='notify'>
+			
+		</div>		
+		
+	</div>
+</body>
+</html>
