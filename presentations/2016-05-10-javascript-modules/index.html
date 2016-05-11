@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>JavaScript modules en Dependency management in de praktijk</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/moon.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/monokai-sublime.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1 style="font-size: 3em;">JavaScript modules en Dependency management in de praktijk</h1>
+					<p>WordPress Meetup Tilburg</p>
+					<pre><code data-trim data-noescape class="javascript" style="text-align: center;">new Date(2016, 4, 10, 20, 45, 0);</code></pre>
+				</section>
+
+				<section>
+					<h1>Gaya Kessler</h1>
+					<ul>
+						<li>Frontend Developer bij <strong>JouwWeb</strong><br /><br /></li>
+						<li>Fan van JavaScript<br /><br /></li>
+						<li>Maker van <a href="http://dramm.it">'Drammit'</a><br /><br /></li>
+						<li><a href="https://blog.gaya.ninja">https://blog.gaya.ninja</a><br /><br /></li>
+						<li><a href="https://twitter.com/GayaNinja">@GayaNinja</a></li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>On the menu today</h2>
+					<ul>
+						<li>Probleemstelling<br /><br /></li>
+						<li>JavaScript modules</li>
+						<li>Oplossingen</li>
+						<li>Voorbeeld implementaties<br /><br /></li>
+						<li>Externe dependencies gebruiken met npm</li>
+						<li>webpack</li>
+						<li>ES6+</li>
+					</ul>
+				</section>
+
+				<section data-background="images/subway.jpg">
+					<h1 style="text-shadow: 6px 6px 20px rgb(0,0,0)">JavaScript gaat hard</h1>
+				</section>
+
+				<section>
+					<h1>Every day another framework</h1>
+				</section>
+
+				<section>
+					<h1>ECMASCRIPT features</h1>
+				</section>
+
+				<section>
+					<h1>Zo veel tools</h1>
+				</section>
+
+				<section>
+					<h2>Waar te beginnen... HOE te beginnen?</h2>
+				</section>
+
+				<section>
+					<h1>Wat je niet moet doen:</h1>
+				</section>
+
+				<section>
+					<h2>1. Grunt / Gulp</h2>
+					<h2>2. Concat al je JavaScript</h2>
+					<h2>3. JavaScript inladen in je browser</h2>
+				</section>
+
+				<section data-background="images/pray.jpg">
+					<h2 style="text-shadow: 6px 6px 20px rgb(0,0,0)">4. Hopen dat het werkt</h2>
+				</section>
+
+				<section>
+					<h1>Daar heeft niemand iets aan.</h1>
+				</section>
+
+				<section>
+					<h1>Enter JavaScript modules</h1>
+				</section>
+
+				<section>
+					<h2>Automatische scoping en isolation</h2>
+					<h2>Herbruikbaar</h2>
+					<h2>Brengt structuur</h2>
+					<h2>Externe modules uit libraries</h2>
+				</section>
+
+				<section>
+					<h1>De opties:</h1>
+				</section>
+
+				<section>
+					<h1>AMD</h1>
+					<h2>Pros:</h2>
+					<p>
+						Async en goed met browsers.
+					</p>
+					<h2>Cons:</h2>
+					<p>
+						Lastige syntax, rommeling, HTTP overhead en Require.js
+					</p>
+				</section>
+
+				<section>
+					<h1>CommonJS</h1>
+					<h2>Pros:</h2>
+					<p>
+						Clean syntax, standaard van Node.js.
+					</p>
+					<h2>Cons:</h2>
+					<p>
+						Synchroon en heeft een bundler nodig.
+					</p>
+				</section>
+
+				<section>
+					<h1>ES6 modules</h1>
+					<h2>Pros:</h2>
+					<p>
+						Clean syntax, named exports, standaard voor ES6, hipster proof.
+					</p>
+					<h2>Cons:</h2>
+					<p>
+						Niet geïmplementeerd in V8, transpiler nodig.
+					</p>
+				</section>
+
+				<section>
+					<h1>Verdict:</h1>
+					<h2>CommonJS en ES6 modules (met Babel)</h2>
+				</section>
+
+				<section data-background="images/coder.jpg">
+					<h1>CODE OR GTFO</h1>
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="javascript">
+var superSecretVariable = 'Hello with Ad';
+
+function callMeMaybe(cb) {
+  cb(superSecretVariable);
+}
+
+module.exports = callMeMaybe;
+</code></pre>
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="javascript">
+function callMeMaybe(cb) {
+  cb();
+}
+
+function callMeNot(cb) {}
+
+module.exports = {
+  callMeMaybe: callMeMaybe,
+  callMeNot: callMeNot,
+};
+</code></pre>
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="javascript">
+var Car = {
+  honk: function() {
+    console.log('HONK');
+  },
+};
+
+module.exports = Car;
+</code></pre>
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="javascript">
+//hello.js
+var superSecretVariable = 'Hello with Ad';
+
+function callMeMaybe(cb) {
+  cb(superSecretVariable);
+}
+
+module.exports = callMeMaybe;
+
+//index.js
+var callMeMaybe = require('./hello');
+
+callMeMaybe(console.log); //Hello with Ad
+
+require('./hello')(window.alert);
+</code></pre>
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="javascript">
+//options.js
+module.exports = {
+  name: 'Gaya',
+  job: 'Developer',
+};
+
+//index.js
+var options = require('./options');
+
+console.log(options.name); //Gaya
+console.log(options.job); //Developer
+console.log(options.skills); //undefined
+</code></pre>
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="javascript">
+// ./car/index.js
+var door = require('./door');
+
+var car = {
+ doors: [],
+};
+
+module.exports = function() {
+  var instance = Object.create(car);
+
+  instance.doors = [];
+  instance.doors.push(door());
+
+  return instance;
+};
+
+// ./index.js
+var perfectCar = require('./car')();
+</code></pre>
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="javascript">
+// ./car/index.js
+var car = require('./car');
+var door = require('./door');
+var roof = require('../house/roof');
+
+module.exports = {
+  car: car,
+  door: door,
+  roof: roof,
+};
+
+// ./house/roof.js
+module.exports = {};
+</code></pre>
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="javascript">
+// car.js
+var car = {
+  name: 'Standard car',
+  honk: function() { console.log(this.name); },
+};
+
+module.exports = function(name) {
+  var instance = Object.create(car);
+  instance.name = name;
+  return instance;
+};
+
+// index.js
+var makeCar = require('./car');
+var myCar = makeCar('Tesla');
+
+myCar.honk(); // Tesla
+</code></pre>
+				</section>
+
+				<section>
+					<h1>Third party libs?</h1>
+				</section>
+
+				<section>
+					<h1>npm</h1>
+				</section>
+
+				<section style="background-color: white; height: 90%;">
+					<img src="images/packages.png" style="position: absolute; height: 90%; top: 2%; left: 5%;" alt="">
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="javascript">
+npm install --save lodash
+</code></pre>
+				</section>
+
+				<section data-background="images/wait.jpg"></section>
+
+				<section>
+<pre><code data-trim data-noescape class="javascript">
+var _ = require('lodash');
+
+_.map([1, 2, 3], function(number) {
+  return number * number;
+}); // 1, 4, 9
+</code></pre>
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="javascript">
+import { map, zipObject } from 'lodash';
+
+map([1, 2, 3], function(number) {
+  return number * number;
+}); // 1, 4, 9
+</code></pre>
+				</section>
+
+				<section><img src="images/blow.gif" alt=""></section>
+
+				<section>
+					<h3>Maar hoe gebruik ik het dan?</h3>
+					<h1>Laten we het eindelijk eens hebben over WP</h1>
+				</section>
+
+				<section data-background="images/webpack.png" data-background-color="#fff">
+					<h1>webpack</h1>
+				</section>
+
+				<section>
+					<h2>webpack maakt bundles</h2>
+					<h2>webpack kan AMD en CommonJS</h2>
+				</section>
+
+				<section>
+					<h2>samen met Babel gebruik maken van ES6+</h2>
+					<h2>is "gewoon" Node.js</h2>
+				</section>
+
+				<section>
+					<h2>geen Grunt / Gulp nodig</h2>
+					<h2>eigen development server</h2>
+					<h2>kan ook Less, Sass, post-css</h2>
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="javascript">
+// webpack.config.js
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    path: './build',
+    filename: 'bundle.js'
+  },
+  module: {
+    loaders: []
+  }
+};
+</code></pre>
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="javascript">
+// webpack.js
+var webpack = require('webpack');
+var config = require('./webpack.config.js');
+
+var compiler = webpack(config);
+compiler.run((err) => {
+  if (err) {
+	console.error(err); }
+
+  console.log('🎉');
+});
+</code></pre>
+				</section>
+
+				<section>
+					<h1>Hippe JavaScript<br />met Babel</h1>
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="javascript">
+npm install
+	babel-loader babel-core babel-preset-es2015
+		--save
+</code></pre>
+				</section>
+
+				<section data-background="images/wait.jpg"></section>
+
+				<section>
+<pre><code data-trim data-noescape class="javascript">
+// webpack.config.js
+module.exports = {
+  entry: './src/index.js',
+  output: {path: './build', filename: 'bundle.js'},
+  module: {
+    loaders: [
+      {
+        test: /\.jsx?$/,
+        exclude: /(node_modules)/,
+        loader: 'babel',
+        query: {
+          presets: ['es2015',]
+        },
+      },
+    ]
+  }
+};
+</code></pre>
+				</section>
+
+				<section>
+					<h1>Wat kan je nu?</h1>
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="javascript">
+import { awesome, stuff, for, you } from 'some-lib';
+
+export const hello = 'world';
+export let thing = {
+  someFunc() {
+    return fetch('https://poop.bike')
+      .then((someThing) => awesome(something));
+  }
+};
+</code></pre>
+				</section>
+
+				<section>
+					<h2>Nice.</h2>
+				</section>
+
+				<section>
+					<h2>Gebruik bundles voor je site / plugin development</h2>
+				</section>
+
+				<section>
+					<h2>Helaas loopt WordPress achter</h2>
+				</section>
+
+				<section>
+					<h1>Maar ja, who cares?</h1>
+				</section>
+
+				<section>
+					<h1>Gewoon doen!</h1>
+				</section>
+
+				<section>
+					<h1>Oke doei.</h1>
+
+					<h3>Gaya Kessler</h3>
+					<h3><a href="https://twitter.com/GayaNinja">@GayaNinja</a></h3>
+
+					<h4>bedankt voor je aandacht</h4>
+				</section>
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: false,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
