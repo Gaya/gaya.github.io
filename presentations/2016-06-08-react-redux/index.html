@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Applying Redux architecture on your existing React application</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/moon.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/prism.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1 style="font-size: 3em;">Applying Redux architecture on your existing React application</h1>
+					<p>Eindhoven Developers Meetup</p>
+					<pre><code data-trim data-noescape class="language-javascript" style="text-align: center;">new Date(2016, 5, 8, 20, 15, 0);</code></pre>
+				</section>
+
+				<section>
+					<h1>Gaya Kessler</h1>
+					<ul>
+						<li>Frontend Developer at <strong>JouwWeb</strong></li>
+						<li>Fan of JavaScript</li>
+						<li>Creator of <a href="http://dramm.it">'Drammit'</a></li>
+						<li><a href="https://twitter.com/GayaNinja">@GayaNinja</a></li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>On the menu today</h2>
+					<ul>
+						<li>What is Redux?</li>
+						<li>Why Redux?</li>
+						<li>How to Redux</li>
+					</ul>
+				</section>
+
+				<section data-background-color="#eee">
+					<img src="images/redux.png" style="background: none; box-shadow: none; border: 0;" alt="">
+				</section>
+
+				<section>
+					Predictable state container for JavaScript apps
+				</section>
+
+				<section>
+					<h2>Integrates perfectly with React</h2>
+				</section>
+
+				<section>
+					<h2>One store to rule them all</h2>
+				</section>
+
+				<section>
+					<h2>So easy, it's hard.</h2>
+				</section>
+
+				<section>
+					<h1>But, why?</h1>
+				</section>
+
+				<section>
+					<h2>No state in components</h2>
+				</section>
+
+				<section>
+					<h2>Super easy to test</h2>
+				</section>
+
+				<section>
+					<h2>Developer happiness</h2>
+
+					<ul>
+						<li>Great time travel tools</li>
+						<li>Universal apps</li>
+						<li>Same data flow throughout application</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Imagine...</h2>
+				</section>
+
+				<section>
+					<img src="images/diagram_1.png" alt="">
+				</section>
+
+				<section>
+					<img src="images/diagram_2.png" alt="">
+				</section>
+
+				<section>
+					<h2>And now with Redux...</h2>
+				</section>
+
+				<section>
+					<img style="transform: scale(0.75); transform-origin: top center;" src="images/diagram_3.png" alt="">
+				</section>
+
+				<section>
+					<img style="transform: scale(0.75); transform-origin: top center;" src="images/diagram_4.png" alt="">
+				</section>
+
+				<section>
+					<h1>Now for the fun part</h1>
+				</section>
+
+				<section>
+					<h1>Recap</h1>
+				</section>
+
+				<section>
+					<h2>Redux is flexible</h2>
+				</section>
+
+				<section>
+					<h2>Redux is fast</h2>
+				</section>
+
+				<section>
+					<h2>Many possibilities</h2>
+				</section>
+
+				<section>
+					<h1>Thanks!</h1>
+
+					<h3>Gaya Kessler</h3>
+					<h3><a href="https://twitter.com/GayaNinja">@GayaNinja</a></h3>
+
+					<p style="font-size: 0.7em">p.s. we're looking for people, so come chat</p>
+				</section>
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="lib/js/prism.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: false,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+//					{ src: 'lib/js/prism.js', condition: function() { } },
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+//					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
