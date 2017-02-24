@@ -1,0 +1,37 @@
+1. introduction subject on becoming better
+2. introduce myself
+3. analogy about a typical JavaScript developer
+4. front-end is moving at a super fast pace
+5. what not to do next?
+	- learn new framework
+	- learn ES6/7/20-15-16/Next/SuperSpecialUltra
+6. Go learn ES5 again.
+	- Try to think more in an isolated module style of coding.
+	- Revise your knowlegde about scopes and closures.
+	- Learn more about `this`
+7. Behaviour delegation vs. Classical Inheritence
+	- Both solve a different problem.
+	- Most developers are taught the classical way.
+	- Class should be a blueprint, not an instance.
+	- Constructors vs Object creation.
+	- Differences in `this` (React example)
+8. Modules and application structure
+	- require or import.
+	- dependency management using npm
+	- use browserify / webpack and Babel.
+	- learn from doing Node.js work
+	- tools are built using Node.js
+	- example structures / starters
+9. Async is Promising
+	- probably familiar with Ajax
+	- Callback is "just" a function which is passed as an argument, an executable object
+	- Try not to nest as much, avoid the pyramids of doom
+	- Callbacks will also make things more complicated, try https://github.com/caolan/async
+	- Promises revert handling of callbacks back to its creator
+	- Try to understand and embrace "normal" callbacks first
+	- Learn about using Promises and Generators (as I need to do more)
+	- Wait for async / await
+10. Linters?
+	- adhere to a style guide
+	- because, yes.
+11. Oke doei.

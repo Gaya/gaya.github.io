@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Skyrocket your Old Toolchain Into the Future!</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/moon.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/prism.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Skyrocket</h1>
+					<h2>your Old Toolchain<br />Into the Future!</h2>
+					<p>Eindhoven Developers Meetup</p>
+					<pre><code data-trim data-noescape class="language-javascript" style="text-align: center;">new Date(2017, 1, 22, 20, 15, 0);</code></pre>
+				</section>
+
+				<section>
+					<h1>Gaya Kessler</h1>
+					<ul>
+						<li>JavaScript Developer at <strong>JouwWeb</strong></li>
+						<li>Creator of <a href="https://www.dramm.it">Drammit</a></li>
+						<li><a href="https://twitter.com/GayaNinja">@GayaNinja</a></li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>On the menu today</h2>
+					<ul>
+						<li>Toolchains: The Old versus The New</li>
+						<li>What we wanted to solve</li>
+						<li>Steps we took</li>
+						<li>Where we are now</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>What is the "old" toolchain?</h2>
+
+					<ul>
+						<li>Backend-first</li>
+						<li>Grunt / Gulp</li>
+						<li>LESS / SASS by Grunt / Gulp</li>
+						<li>AMD (Require.js) or Concatenation</li>
+						<li>jQuery like approach</li>
+					</ul>
+				</section>
+
+				<section data-background-color="#ddd">
+					<img src="images/diagram-1.svg" style="background: none; box-shadow: none; border: 0;" alt="">
+				</section>
+
+				<section>
+					<h2>Getting assets</h2>
+
+					<ul>
+						<li>Get JavaScript from script tags</li>
+						<li>Get Stylesheets from link tags</li>
+						<li>Get images from img tags</li>
+						<li>Require JavaScript files through injection</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>What is the "new" toolchain?</h2>
+
+					<ul>
+						<li>Single Page Applications</li>
+						<li>Backend is API</li>
+						<li>ES6+</li>
+						<li>NPM scripts for tasks</li>
+						<li>webpack for bundling entry points</li>
+						<li>JavaScript as a starting point</li>
+					</ul>
+				</section>
+
+				<section data-background-color="#ddd">
+					<img src="images/diagram-2.svg" style="background: none; box-shadow: none; border: 0;" alt="">
+				</section>
+
+				<section>
+					<h2>Getting assets</h2>
+
+					<ul>
+						<li>Get JavaScript from script tags</li>
+						<li>Webpack tells to include style</li>
+						<li>Webpack loads images</li>
+						<li>Require JavaScript files through webpack chunks</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Why going forward is hard</h2>
+
+					<ul>
+						<li>Don't know where to start</li>
+						<li>Moving over (forgotten) paradigms</li>
+						<li>Backend is not supported yet</li>
+						<li>You have to figure out everything</li>
+						<li>You have a lot of code to manage</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Why starting from scratch is easier</h2>
+
+					<ul>
+						<li>Clean slate</li>
+						<li>Freedom</li>
+						<li>No legacy</li>
+						<li>You can try out everything</li>
+						<li>You can adjust your backend to it</li>
+						<li>Project is most likely smaller</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>How the "old" way stinks</h2>
+
+					<ul>
+						<li>Gets messy really quick</li>
+						<li>AMD (Require.js) has better alternatives</li>
+						<li>Dependency management is unclear</li>
+						<li>Pipeline can be confusing</li>
+						<li>Support is getting worse</li>
+					</ul>
+				</section>
+
+				<section data-background-color="#ddd">
+					<img src="images/jouwweb.svg" style="background: none; box-shadow: none; border: 0;" alt="">
+				</section>
+
+				<section>
+					<h2>What we needed to solve at JouwWeb</h2>
+
+					<h3>New</h3>
+					<ul>
+						<li>Managealbe code base</li>
+						<li>ES6+</li>
+						<li>ES7 modules + chunks</li>
+						<li>Source maps for development</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>What we needed to solve at JouwWeb</h2>
+
+					<h3>Keep</h3>
+					<ul>
+						<li>Make sure old libs keep working</li>
+						<li>Adjust as little as possible</li>
+						<li>AMD should work too</li>
+						<li>Development "watch" mode</li>
+						<li>Production output using webpack</li>
+						<li>File size</li>
+					</ul>
+				</section>
+
+				<section>
+					<p>"Don't pounce on every chance to rewrite the world. Refactor little bits as you go. Make it work, first. Then make it right."</p>
+					<h3>- Eric Elliott</h3>
+				</section>
+
+				<section>
+					<h2>Know problems</h2>
+
+					<ul>
+						<li>What are entry points?</li>
+						<li>Source was copied from a weird folder structure</li>
+						<li>Backend injects script tags</li>
+						<li>Dynamic requires in our code</li>
+						<li>We required 3th party libs using <code class="language-javascript">require('lib/jquery');</code></li>
+						<li>Some dependencies couldn't be bundled</li>
+						<li>Files copied from <code>node_modules</code> using grunt</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Set deliverables</h2>
+
+					<p>Try to ship as little as possible</p>
+				</section>
+
+				<section>
+					<h2>Steps we took</h2>
+
+					<ol>
+						<li>Organize code in structure webpack will understand</li>
+						<li>Have all our entry points work with webpack</li>
+						<li>Introduce Babel</li>
+						<li>Solve <code class="language-javascript">require('lib/jquery');</code> problem</li>
+						<li>Solve dynamic requires</li>
+						<li>Let JavaScript handle injected scripts</li>
+						<li>Fix broken "old" libraries</li>
+						<li>Have a development "watch" environment</li>
+					</ol>
+				</section>
+
+				<section>
+					<h2>Steps we didn't take</h2>
+
+					<ol>
+						<li>LESS was still part of the "old"</li>
+						<li>Fix our folder structure</li>
+						<li>Handle copying of assets</li>
+						<li>Make it blazing fast</li>
+					</ol>
+				</section>
+
+				<section>
+					<h2>Basics</h2>
+
+					<p>
+						We created a JavaScript file...
+					</p>
+
+					<p>
+						Execute in NPM
+					</p>
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="language-javascript">
+// package.json
+{
+	...
+	"scripts": {
+		"build": "node ./tasks/webpack"
+	}
+}
+
+// cli
+</code></pre>
+					<p>
+						<code data-trim data-noescape class="language-javascript">&gt; npm run build</code>
+					</p>
+				</section>
+
+				<section>
+					<h2>Organising the structure</h2>
+
+					<p>
+						<code>module/Text/assets/js/plugin/text.js</code>
+						<code>module/Video/assets/js/plugin/video.js</code>
+					</p>
+
+					<p>
+						<code class="language-javascript">require('plugin/text.js');</code>
+						<code class="language-javascript">require('plugin/video.js');</code>
+					</p>
+				</section>
+
+				<section>
+					<h2>Organising the structure</h2>
+
+					<p>
+						<div><code>module/*/assets/js/**/*.js</code></div>
+						copy to
+						<div><code>public/assets/js/**/*.js</code></div>
+					</p>
+
+					<p>
+						Make <code>public/assets/js</code> a "module root" in webpack
+					</p>
+
+					<p>
+						<code class="language-javascript">require('filename.js');</code>
+					</p>
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="language-javascript">
+const config = {
+	...
+	resolve: {
+		modules: [
+			'public/assets/js',
+			'node_modules',
+			'bower_components',
+		],
+	},
+};
+</code></pre>
+				</section>
+
+				<section>
+					<h2>How we made "watch" work</h2>
+
+					<p>
+						webpack watches <div><code>public/assets/js/**/*.js</code></div>
+					</p>
+
+					<p>
+						We watch for changes in <div><code>module/*/assets/js/**/*.js</code></div>
+					</p>
+
+					<p>
+						Copy all to <div><code>public/assets/js/**/*.js</code></div>
+					</p>
+
+					<p>
+						webpack reruns
+					</p>
+				</section>
+
+				<section>
+					<h2>It's not elegant, but effective</h2>
+				</section>
+
+				<section>
+					<h2>Entry points</h2>
+
+<pre><code data-trim data-noescape class="language-javascript">
+const config = {
+	...
+	entry: {
+		'js/initialize': './js/app/initialize',
+	},
+	output: {
+		path: 'public/assets/',
+		filename: '[name].js',
+	}
+}
+
+// 'public/assets/' + 'js/initialize' + '.js'
+</code></pre>
+				</section>
+
+				<section>
+					<h3><code class="language-javascript">require('lib/*');</code></h3>
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="language-javascript">
+// lib/bootstrap.js (AMD style)
+define(
+	['bootstrap/dist/js/bootstrap'],
+	function (bootstrap) => { return bootstrap }
+);
+
+// lib/bxslider.js (CommonJS style)
+module.exports = require('bxslider-4/dist/jquery.bxslider');
+</code></pre>
+				</section>
+
+				<section>
+					<h1><code>¯\_(ツ)_/¯</code></h1>
+				</section>
+
+				<section>
+					<h2>Dynamic module includes</h2>
+
+<pre><code data-trim data-noescape class="language-javascript">
+define(['scripts/backend'], function(module) { ... });
+</code></pre>
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="language-javascript">
+function includeModule(name) {
+	define([name], function(module) { ... });
+}
+
+// somewhere else
+includeModule('scripts/backend');
+</code></pre>
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="language-javascript">
+function includeModule(name) {
+	function cb(module) { ... }
+
+	switch (name) {
+		case 'scripts/backend':
+			require(['scripts/backend'], cb);
+			break;
+		case 'scripts/editor':
+			require(['scripts/editor'], cb);
+			break;
+	}
+}
+</code></pre>
+				</section>
+
+				<section>
+					<h2>Injected scripts</h2>
+
+					<p>What if the backend generates <code>&lt;script /&gt;</code> tags?</p>
+
+<pre><code data-trim data-noescape class="language-html">
+&lt;script src="assets/js/module-a.js" /&gt;
+&lt;script src="assets/js/module-b.js" /&gt;
+</code></pre>
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="language-html">
+&lt;script&gt;
+	window.scripts = ['module-a', 'module-b'];
+&lt;/script&gt;
+</code></pre>
+
+<pre><code data-trim data-noescape class="language-javascript">
+// in JavaScript
+window.scripts.forEach(includeModule);
+</code></pre>
+				</section>
+
+				<section>
+					<h3>Old dependencies</h3>
+
+					<ul>
+						<li>Fixed them by hand</li>
+						<li>Not really important</li>
+						<li>tinymce is a totally different story</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>What we did later</h2>
+
+					<ul>
+						<li>Fixed our folder structure</li>
+						<li>Got LESS (and other assets) to webpack</li>
+						<li>Hot Reloading with webpack dev server</li>
+						<li>Able to refactor a lot</li>
+						<li>SUPER FAST!</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Where we want to be</h2>
+
+					<ul>
+						<li>Single Page Application</li>
+						<li>Mostly built on React</li>
+						<li>Dynamic route loading</li>
+						<li>Drinking beer on a sunny island</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Improve your project,<br />just do it <br />one little step<br />at the time.</h2>
+					<p>- Gaya Kessler</p>
+				</section>
+
+				<section>
+					<h1>Thanks!</h1>
+
+					<h3>For more brain farts check <a href="https://twitter.com/GayaNinja">@GayaNinja</a></h3>
+
+					<p style="font-size: 0.6em; opacity: 0.5;">(p.s. we're always looking for people, so come chat)</p>
+				</section>
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="lib/js/prism.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: false,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'fade', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/prism.js', condition: function() { } },
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+//					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
