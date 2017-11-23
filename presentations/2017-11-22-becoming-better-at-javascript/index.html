@@ -1,0 +1,1268 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Becoming Better at JavaScript (MUG040)</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/night.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/monokai-sublime.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<style>
+			.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5 {
+				font-family: "Open Sans";
+			}
+
+			.reveal pre {
+				box-shadow: none;
+				-moz-tab-size: 4;
+				-o-tab-size: 4;
+				tab-size: 4;
+			}
+
+			.hljs {
+				background: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h2>Becoming Better at</h2><h1>JavaScript</h1>
+					<p>MUG040</p>
+					<pre><code data-trim data-noescape class="javascript" style="text-align: center;">new Date(2017, 10, 22);</code></pre>
+				</section>
+
+				<section>
+					<h2>JavaScript is coming<br />for you</h2>
+
+					<aside class="notes">
+						<ul>
+							<li>The importance of javascript</li>
+							<li>More web apps</li>
+							<li>React Native / Native Script</li>
+							<li>Can't really go without</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h2><a href="https://theclevernode.com">Gaya Kessler</a></h2>
+					<p>Freelance Full Stack Web Developer</p>
+					<p>JavaScript, React, Node.js</p>
+					<p><br />Creator of <a href="https://www.dramm.it">Drammit</a> and <a
+							href="https://www.getformable.com">Formable</a></p>
+
+					<p><a href="https://twitter.com/gayakessler">@GayaKessler</a> on Twitter</p>
+
+					<aside class="notes">
+						<ul>
+							<li>slides will be up later</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section data-background="images/5ed7f737-5ca3-4930-88da-c1276cdd8ed4-1020x612.jpeg">
+					<h2><span style="background: #d33682; padding: 0 20px; text-transform: uppercase;">Frontend is<br />moving fast</span></h2>
+				</section>
+
+				<section>
+					<h2>"That is so last week!"</h2>
+
+					<aside class="notes">
+						<ul>
+							<li>Gets old quick</li>
+							<li>Stuff changes a lot</li>
+							<li>hard to mature</li>
+							<li>way javascript is used changes</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h2>It's hard to start learning or improving skills</h2>
+					<h4>When all that's written is already outdated</h4>
+
+					<aside class="notes">
+						<ul>
+							<li>Starting or improving is hard</li>
+							<li>no idea where to start</li>
+							<li>Redux is "bad"</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h1>So what should I do?</h1>
+
+					<aside class="notes">
+						<ul>
+							<li>learn the fundamentals first</li>
+							<li>revise if you know the fundamentals</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h2>Talk outline</h2>
+					<h4>1. Understanding the fundamentals</h4>
+					<h4>2. Moving forward</h4>
+					<h4>3. Beyond the browser</h4>
+				</section>
+
+				<section>
+					<h1>1. The fundamentals</h1>
+				</section>
+
+				<section>
+					<h2>Scopes and Closures</h2>
+				</section>
+
+				<section>
+					<h4>Closures</h4>
+					<pre><code data-trim data-noescape class="javascript">
+function nameGenerator() {
+	var name = 'Gaya';
+
+	function giveName() {
+		return name;
+	}
+
+	return giveName;
+}
+
+var generate = nameGenerator(); // puts giveName() in generate
+
+generate(); // Gaya
+</code></pre>
+				</section>
+
+				<section>
+					<h4>Closures</h4>
+					<pre><code data-trim data-noescape class="javascript">
+for (var i = 0; i < 5; i++) {
+	setTimeout(function timer() {
+		console.log(i);
+	}, i * 1000);
+}
+
+// 5
+// 5
+// 5
+// 5
+// 5
+</code></pre>
+				</section>
+
+				<section>
+					<h4>Closures</h4>
+					<pre><code data-trim data-noescape class="javascript">
+for (var i = 0; i < 5; i++) { // <-- create scope for 'i'
+	setTimeout(function timer() {
+		console.log(i);
+	}, i * 1000);
+}
+</code></pre>
+				</section>
+
+				<section>
+					<h4>Closures</h4>
+					<pre><code data-trim data-noescape class="javascript">
+for (var i = 0; i < 5; i++) {
+	setTimeout(function timer() {
+		console.log(i);
+	}, i * 1000); // <-- 0 * 1000
+}
+</code></pre>
+				</section>
+
+				<section>
+					<h4>Closures</h4>
+					<pre><code data-trim data-noescape class="javascript">
+for (var i = 0; i < 5; i++) {
+	setTimeout(function timer() {
+		console.log(i);
+	}, i * 1000); // <-- 1 * 1000
+}
+</code></pre>
+				</section>
+
+				<section>
+					<h4>Closures</h4>
+					<pre><code data-trim data-noescape class="javascript">
+for (var i = 0; i < 5; i++) {
+	setTimeout(function timer() {
+		console.log(i);
+	}, i * 1000); // <-- 2 * 1000
+}
+</code></pre>
+				</section>
+
+				<section>
+					<h4>Closures</h4>
+					<pre><code data-trim data-noescape class="javascript">
+for (var i = 0; i < 5; i++) {
+	setTimeout(function timer() {
+		console.log(i);
+	}, i * 1000); // <-- 3 * 1000
+}
+</code></pre>
+				</section>
+
+				<section>
+					<h4>Closures</h4>
+					<pre><code data-trim data-noescape class="javascript">
+for (var i = 0; i < 5; i++) {
+	setTimeout(function timer() {
+		console.log(i);
+	}, i * 1000); // <-- 4 * 1000
+}
+</code></pre>
+				</section>
+
+				<section>
+					<h4>Closures</h4>
+					<pre><code data-trim data-noescape class="javascript">
+for (var i = 0; i < 5; i++) { // <-- i++ = 5
+	setTimeout(function timer() {
+		console.log(i);
+	}, i * 1000);
+}
+</code></pre>
+				</section>
+
+				<section>
+					<h4>Closures</h4>
+					<pre><code data-trim data-noescape class="javascript">
+for (var i = 0; i < 5; i++) {
+	setTimeout(function timer() {
+		console.log(i); // 5
+	}, i * 1000);
+}
+</code></pre>
+				</section>
+
+				<section>
+					<h4>Closures to the rescue!</h4>
+					<pre><code data-trim data-noescape class="javascript">
+for (var i = 0; i < 5; i++) {
+	(function (j) {
+		setTimeout(function timer() {
+			console.log(j);
+		}, j * 1000);
+	})(i);
+}
+</code></pre>
+				</section>
+
+				<section>
+					<h4>Closures to the rescue!</h4>
+					<pre><code data-trim data-noescape class="javascript">
+function createTimer(j) {
+	return function timer() {
+		console.log(j);
+	}
+}
+
+for (var i = 0; i < 5; i++) {
+	setTimeout(createTimer(i), i * 1000);
+}
+</code></pre>
+				</section>
+
+				<section>
+					<h2>What is <code>this</code>?</h2>
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="javascript">
+function foo(cb) {
+	this.a = 'hey';
+	cb();
+}
+
+function bar() {
+	console.log(this.a);
+}
+
+var hi = bar;
+hi.a = 'hi';
+
+foo(hi); // hey
+hi.a; // hi
+</code></pre>
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="javascript">
+function foo(cb) { // <-- `bar` is `cb`
+	this.a = 'hey';
+	cb(); // <-- call site
+}
+
+function bar() {
+	console.log(this.a); // <-- now `this` is `foo`
+}
+
+var hi = bar;
+hi.a = 'hi';
+
+foo(hi);
+hi.a;
+</code></pre>
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="javascript">
+function foo(cb) {
+	this.a = 'hey';
+	cb(); // <-- still the same call site
+}
+
+function bar() {
+	console.log(this.a); // <-- but `this` is bound to `hi`
+}
+
+var hi = bar;
+hi.a = 'hi';
+
+foo(hi.bind(hi)); // hi
+</code></pre>
+				</section>
+
+				<section>
+					<h3><code>this</code> or <code>that</code></h3>
+<pre><code data-trim data-noescape class="javascript">
+var Gaya = {
+	hobby: 'Whisky',
+	sayHobby: function () {
+		console.log(this.hobby);
+	},
+	sayHobbyAfterAFewDrinks: function () {
+		setTimeout(function () {
+			console.log(this.hobby);
+		}, 1000);
+	},
+};
+
+Gaya.sayHobby(); // Whisky
+Gaya.sayHobbyAfterAFewDrinks(); // undefined
+</code></pre>
+					<aside class="notes">
+						<ul>
+							<li>Point out call sites</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3><code>this</code> or <code>that</code></h3>
+					<pre><code data-trim data-noescape class="javascript">
+var Gaya = {
+	hobby: 'Whisky',
+	sayHobby: function () {
+		console.log(this.hobby);
+	},
+	sayHobbyAfterAFewDrinks: function () {
+		var that = this;
+		setTimeout(function () {
+			console.log(that.hobby);
+		}, 1000);
+	},
+};
+
+Gaya.sayHobby(); // Whisky
+Gaya.sayHobbyAfterAFewDrinks(); // Whisky
+</code></pre>
+				</section>
+
+				<section>
+					<h3><code>this</code> or <code>that</code></h3>
+					<pre><code data-trim data-noescape class="javascript">
+var Gaya = {
+	hobby: 'Whisky',
+	sayHobby: function () {
+		console.log(this.hobby);
+	},
+	sayHobbyAfterAFewDrinks: function () {
+		setTimeout(function () {
+			console.log(this.hobby);
+		}.bind(this), 1000);
+	},
+};
+
+Gaya.sayHobby(); // Whisky
+Gaya.sayHobbyAfterAFewDrinks(); // Whisky
+</code></pre>
+				</section>
+
+				<section>
+					<h3><code>this</code> or <code>that</code></h3>
+					<pre><code data-trim data-noescape class="javascript">
+var Gaya = {
+	hobby: 'Whisky',
+	sayHobby: function () {
+		console.log(this.hobby);
+	},
+	sayHobbyAfterAFewDrinks: function () {
+		setTimeout(() => {
+			console.log(this.hobby);
+		}, 1000);
+	},
+};
+
+Gaya.sayHobby(); // Whisky
+Gaya.sayHobbyAfterAFewDrinks(); // Whisky
+</code></pre>
+				</section>
+
+				<section>
+					<h3>Object context</h3>
+<pre><code data-trim data-noescape class="javascript">
+var Car = {
+	sound: 'Vroom vroom',
+	drive: function () {
+		console.log(this.sound);
+	}
+};
+
+var Bus = {
+	sound: 'Rumble rumble',
+	drive: Car.drive,
+};
+
+Bus.drive(); // Rumble rumble
+</code></pre>
+					<aside class="notes">
+						<ul>
+							<li>Get back to delegation later</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h2>Async</h2>
+
+					<aside class="notes">
+						<ul>
+							<li>one of the hardest concepts to get right</li>
+							<li>when it clicks, it clicks</li>
+							<li>callbacks, promises, generators</li>
+							<li>will discuss callbacks, promises</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h4>Callbacks</h4>
+<pre><code data-trim data-noescape class="javascript">
+function superHardMathProblem(callback) {
+	console.log('Thinking...');
+
+	setTimeout(callback, 1000);
+}
+
+superHardMathProblem(function () {
+	console.log('Done!');
+});
+
+// do other stuff
+</code></pre>
+					<aside class="notes">
+						<ul>
+							<li>Event pool</li>
+							<li>Put away to execute later</li>
+							<li>For example fetching data</li>
+							<li>Imagine we couldn't use a site when data is loading</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Callbacks are used heavily in Node.js</h3>
+					<h5>Error first style callbacks</h5>
+
+					<aside class="notes">
+						<ul>
+							<li>Error first style callbacks</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h4>Callback hell</h4>
+<pre><code data-trim data-noescape class="javascript">
+setTimeout(function() {
+  setTimeout(function() {
+	setTimeout(function() {
+    	setTimeout(function() {}, 100);
+  	}, 100);
+  }, 100);
+}, 100);
+</code></pre>
+				</section>
+
+				<section>
+					<h4>Still callback hell</h4>
+<pre><code data-trim data-noescape class="javascript">
+function wait(cb) {
+	setTimeout(cb, 100);
+}
+
+wait(wait(wait(function () {
+	console.log('Waited for 300ms!');
+})));
+</code></pre>
+				</section>
+
+				<section>
+					<h4>Still callback hell</h4>
+					<pre><code data-trim data-noescape class="javascript">
+function step1() {
+	setTimeout(step2, 100);
+}
+
+function step2() {
+	setTimeout(step3, 100);
+}
+
+function step3() {
+	console.log('I am done!');
+}
+
+step1();
+</code></pre>
+				</section>
+
+				<section>
+					<h4>Promises</h4>
+					<pre><code data-trim data-noescape class="javascript">
+var step1 = () =>
+	new Promise(resolve => setTimeout(resolve, 100));
+
+var step2 = new Promise(function (resolve) {
+	setTimeout(resolve, 100);
+});
+
+var step3 = new Promise(function () {
+	return 'I am done!';
+});
+
+step1().then(step2).then(step3)
+	.then(console.log).catch(console.error); // I am done!
+</code></pre>
+					<aside class="notes">
+						<ul>
+							<li>inversion of control!</li>
+							<li>can also just make a promise (step2)</li>
+							<li>then get wrapped in promise</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Promises are future values</h3>
+
+					<aside class="notes">
+						<ul>
+							<li>Think of I owe yous</li>
+							<li>Value might already be available, or not</li>
+							<li>but most importantly...</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Promises are always async</h3>
+
+					<aside class="notes">
+						<ul>
+							<li>Always write async</li>
+							<li>No need to rewrite</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3><code class="javascript">Promise.all()</code></h3>
+					<h3><code class="javascript">Promise.race()</code></h3>
+					<h3><code class="javascript">Promise.resolve()</code></h3>
+				</section>
+
+				<section>
+					<h2>Object Oriented programming in JavaScript</h2>
+
+					<aside class="notes">
+						<ul>
+							<li>classical vs prototypical</li>
+							<li>enhancing vs extending</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h2>"Composition over inheritance."</h2>
+					<h4>- Design Patterns by Gang of Four (1994)</h4>
+				</section>
+
+				<section>
+					<h3>How we explain inheritance</h3>
+
+					<img src="images/inheritance.gif" alt="">
+				</section>
+
+				<section>
+					<h3>But what if we want a mammal which lays eggs?</h3>
+
+					<aside class="notes">
+						<ul>
+							<li>platypus</li>
+							<li>Most languages dont support extending multiple classes</li>
+							<li>Having a single ancestor will get complicated quick</li>
+							<li>Banana, Gorilla, Jungle problem</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h2>Classes in JavaScript</h2>
+					<h4>A complete and utter mess</h4>
+
+					<aside class="notes">
+						<ul>
+							<li>Class is a blueprint for object creation</li>
+							<li>We're implementing concepts not fit of the engine</li>
+							<li>Why even try</li>
+							<li>It's just not classes</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h4>The pre ES6 way</h4>
+<pre><code data-trim data-noescape class="javascript">
+function StrangeThing() {
+	// ... some constructor
+}
+
+StrangeThing.prototype.upsideDown = function () {
+	// ... some action
+}
+
+console.log(StrangeThing);
+	// function StrangeThing()
+
+var instance = new StrangeThing();
+console.log(instance);
+	// Object { }
+</code></pre>
+				</section>
+
+				<section>
+					<h4>What is a <code>class</code>?</h4>
+<pre><code data-trim data-noescape class="javascript">
+class StrangeThing {
+	upsideDown() {
+		// some action
+	}
+}
+
+console.log(StrangeThing);
+	// function StrangeThing()
+
+var instance = new StrangeThing();
+console.log(instance);
+	// Object {  }
+</code></pre>
+				</section>
+
+				<section>
+					<h1>🤔</h1>
+				</section>
+
+				<section>
+					<h4>Behaviour delegation</h4>
+<pre><code data-trim data-noescape class="javascript">
+var Foo = {
+	a: 'World',
+	bar: function() {
+		console.log(this.a);
+	},
+};
+
+var Whoop = Object.create(Foo);
+Whoop.a = 'Hello',
+
+Whoop.bar(); // Hello
+
+Foo.bar = function () { console.log('Fooled you!'); };
+Whoop.bar(); // Fooled you!
+</code></pre>
+				</section>
+
+				<section>
+					<h4>Extending</h4>
+<pre><code data-trim data-noescape class="javascript">
+var Foo = {
+	a: 'World',
+	bar: function() {
+		console.log(this.a);
+	},
+};
+
+var Whoop = Object.assign({}, Foo, { a: 'Hello' });
+
+Whoop.bar(); // Hello
+
+Foo.bar = function () {};
+Whoop.bar(); // Hello
+</code></pre>
+				</section>
+
+				<section>
+					<h4>My advise:</h4>
+					<h3>Use composition</h3>
+				</section>
+
+				<section>
+					<h1>2. Moving forward</h1>
+				</section>
+
+				<section>
+					<h2>Modules and structure</h2>
+
+					<h4>"Do one thing, and do it well."</h4>
+
+					<aside class="notes">
+						<ul>
+							<li>use npm modules</li>
+							<li>Helps structuring your code</li>
+							<li>Seperates code from each other</li>
+							<li>Declutters projects</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h2><code>require</code> vs <code>import</code></h2>
+
+					<aside class="notes">
+						<ul>
+							<li>require has more support</li>
+							<li>used in node.js</li>
+							<li>named exports</li>
+							<li>needs babel for node.js too</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Require</h3>
+<pre><code data-trim data-noescape class="javascript">
+// someModule.js
+
+module.exports = function someModule(input) {
+	return input + 1;
+}
+
+// other file
+
+var someModule = require('./someModule');
+
+someModule(41); // 42
+</code></pre>
+				</section>
+
+				<section>
+					<h3>imports</h3>
+<pre><code data-trim data-noescape class="javascript">
+// someModule.js
+
+export default function someModule(input) {
+	return input + 1;
+}
+
+// other file
+
+import someModule from './someModule';
+
+someModule(41); // 42
+</code></pre>
+				</section>
+
+				<section>
+					<h3>Named exports</h3>
+<pre><code data-trim data-noescape class="javascript">
+// someModule.js
+
+export function addTwo(input) {
+	return input + 2;
+}
+
+export function addOne(input) {
+	return input + 1;
+}
+
+// other file
+
+import { addOne, addTwo } from './someModule';
+
+addOne(addTwo(39)); // 42
+</code></pre>
+				</section>
+
+				<section>
+					<h3>Dynamic imports</h3>
+<pre><code data-trim data-noescape class="javascript">
+import('./someModule')
+	.then(({ addOne, addTwo}) => {
+		addOne(addTwo(39)); // 42
+	});
+
+</code></pre>
+					<aside class="notes">
+						<ul>
+							<li>Ideal for code splitting</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>You'll need transpilers</h3>
+
+					<aside class="notes">
+						<ul>
+							<li>In browsers</li>
+							<li>Babel for node.js if using import</li>
+							<li>browserify, rollup, webpack</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Next generation JavaScript</h3>
+					<h5>or ES6 ES7 ES2015 ESNEXT...</h5>
+
+					<aside class="notes">
+						<ul>
+							<li>Browser support is getting better</li>
+							<li>Transpile and polyfill when it doesn't work</li>
+							<li>Makes your life so much easier</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h4>Arrow functions</h4>
+<pre><code data-trim data-noescape class="javascript">
+var returnFirstArg = param => param;
+returnFirstArg(42, 'Hi', 13); // 42
+
+var noArgs = () => 'Test';
+noArgs(); // Test
+
+var withArgs = (a, b, c, d) => a + b + c + d;
+withArgs(12, 20, 8, 2); // 42
+
+var withBody = () => {
+	var something = 'Something';
+
+	return something;
+};
+</code></pre>
+					<aside class="notes">
+						<ul>
+							<li>Different kinds of arrow functions</li>
+							<li>returns value without body</li>
+							<li>lexical this binding</li>
+							<li>anonymous, except if assigned to var</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h4><code>const</code> and <code>let</code></h4>
+<pre><code data-trim data-noescape class="javascript">
+const hello = 'Hi';
+hello = 'Overwrite';
+	// TypeError: invalid assignment to const `hello'
+
+let hi = 'Hello';
+
+if (hi === 'Hello') {
+	let hi = 'World';
+	hi; // World
+}
+
+hi; // Hello
+</code></pre>
+					<aside class="notes">
+						<ul>
+							<li>const, my favourite</li>
+							<li>const: no reassignment, "immutable"</li>
+							<li>let: when you need to overwrite</li>
+							<li>let: has own block scope</li>
+							<li>let: great for for loops</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h4>Template strings</h4>
+<pre><code data-trim data-noescape class="javascript">
+const firstName = 'Gaya';
+const surName = 'Kessler';
+
+const fullName = `${firstName} ${surName}`;
+	// Gaya Kessler
+
+const multiline = `Well,
+this is new!
+Awesome.`;
+
+const showName = true;
+const expressions =
+	`Hello ${showName ? firstName : 'you'}!`;
+	// Hello Gaya
+</code></pre>
+				</section>
+
+				<section>
+					<h4>Destructuring</h4>
+<pre><code data-trim data-noescape class="javascript">
+const Gaya = { name: 'Gaya', height: 184, age: 30 };
+
+const { age, name } = Gaya;
+</code></pre>
+				</section>
+
+				<section>
+					<h4>Destructuring</h4>
+					<pre><code data-trim data-noescape class="javascript">
+const Gaya = ['Gaya', 184, 30];
+
+const [name, height, age] = Gaya;
+</code></pre>
+				</section>
+
+				<section>
+					<h4>Spread operator</h4>
+<pre><code data-trim data-noescape class="javascript">
+const Gaya = { name: 'Gaya', height: 184, age: 30 };
+const Harry = { ...Gaya, name: 'Harry' };
+	// { name: 'Harry', height: 184, age: 30 };
+
+// same as
+
+const Harry = Object.assign({}, Gaya, { name: 'Harry' });
+</code></pre>
+				</section>
+
+				<section>
+					<h4>Spread operator</h4>
+<pre><code data-trim data-noescape class="javascript">
+const numbers = [1, 2, 3, 4, 5];
+const floats = [0.2, 0.5, 3.72];
+
+numbers.concat(floats);
+
+// or
+[...numbers, ...floats];
+// [1, 2, 3, 4, 5, 0.2, 0.5, 3.72]
+
+[...numbers, 6, 7, 8, 9, 10];
+// [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+</code></pre>
+				</section>
+
+				<section>
+					<h4><code>async await</code></h4>
+<pre><code data-trim data-noescape class="javascript">
+async function fetchContent() {
+	try {
+		const result = await fetch('https://www.google.com');
+		const text = await result.text();
+
+		return text;
+	} catch (e) {
+		throw new Error(e.message);
+	}
+}
+
+const text = await fetchContent();
+</code></pre>
+					<aside class="notes">
+						<ul>
+							<li>Always returns a Promise (strong typed...)</li>
+							<li>Reads as if sync</li>
+							<li>Catching errors is very clear</li>
+							<li>Please learn Promises first</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h2>Pure vs. Impure</h2>
+				</section>
+
+				<section>
+					<h3>Pure functions</h3>
+
+					<ul>
+						<li>no side-effects</li>
+						<li>given the same input, will always<br />return the same output</li>
+						<li>are predictable</li>
+						<li>are very testable</li>
+					</ul>
+
+					<aside class="notes">
+						<ul>
+							<li>A must for functional programming</li>
+							<li>perfect for composing</li>
+							<li>unit tests are a breeze</li>
+							<li>React and Redux love it</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Impure functions</h3>
+
+					<ul>
+						<li>Makes sense to call without<br />using the return value</li>
+						<li>Can adjust external values</li>
+					</ul>
+
+					<aside class="notes">
+						<ul>
+							<li>math.random</li>
+							<li>setters and getters</li>
+							<li>getter which was setting story</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Some tips</h3>
+
+					<ul>
+						<li>Never touch arguments, copy them</li>
+						<li>Avoid using state in objects<br />or <code>this</code> altogether</li>
+						<li>Most methods are better off as functions</li>
+					</ul>
+
+					<aside class="notes">
+						<ul>
+							<li>copy arguments, prevents spagetti</li>
+							<li>methods implicate using <code>this</code>, avoid, pass whole object</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Get the hang of (pure) Array functions</h3>
+					<code>map reduce filter find</code>
+				</section>
+
+				<section>
+					<h2>Composition</h2>
+
+					<h5>"a product of mixing or combining<br />various elements or ingredients"</h5>
+				</section>
+
+				<section>
+					<h3>Composing in JavaScript</h3>
+
+					<aside class="notes">
+						<ul>
+							<li>Creating an enhanced version of something</li>
+							<li>Combining functionality</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="javascript">
+function compose(...fns) {
+	const reversedFns = [...fns].reverse();
+	return (input) =>
+		reversedFns.reduce((value, fn) => fn(value), input);
+}
+
+const roundString = compose(Math.round, parseFloat);
+roundString('80.5'); // 81
+</code></pre>
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="javascript">
+const canLoose = (obj) => ({
+	...obj,
+	loose() { console.log(`${this.name} lost!`); }
+});
+
+const canWin = (obj) => ({
+	...obj,
+	win() { console.log(`${this.name} won!`); }
+});
+
+function createGame(input) {
+	return canLoose(canWin(input));
+	// or
+	return compose(canLoose, canWin)(input);
+}
+</code></pre>
+				</section>
+
+				<section>
+					<h1>3. Beyond the browser</h1>
+				</section>
+
+				<section>
+					<h3>Using <a href="https://babeljs.io/">babel</a> & <a href="https://webpack.js.org/">webpack</a></h3>
+
+					<aside class="notes">
+						<ul>
+							<li>babel will transpile js</li>
+							<li>webpack will bundle dependencies</li>
+							<li>webpack can do a lot</li>
+							<li>automatic optimization</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Problem! It's confusing and hard.</h3>
+
+					<aside class="notes">
+						<ul>
+							<li>Hard to get into</li>
+							<li>Lots of horrible config</li>
+							<li>Hard to setup and understand</li>
+							<li>Try starters or create-react-app</li>
+							<li>will need it in the long run</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<p>
+						<a href="https://github.com/facebookincubator/create-react-app">
+							<code>create-react-app</code>
+						</a>
+					</p>
+					<p>
+						<a href="https://github.com/gdi2290/angular-starter">
+							<code>angular-starter</code>
+						</a>
+					</p>
+					<p>
+						<a href="https://github.com/developit/preact-cli">
+							<code>preact-cli</code>
+						</a>
+					</p>
+				</section>
+
+				<section>
+					<h3>use linters and a styleguide</h3>
+
+					<aside class="notes">
+						<ul>
+							<li>Makes your code beautiful</li>
+							<li>Readable</li>
+							<li>Whole team has the same style</li>
+							<li>Takes about an hour to setup</li>
+							<li>Takes a day to get used to</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h4>What I use</h4>
+					<p><a href="https://eslint.org/"><code>ESLint</code></a></p>
+					<p><a href="https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb"><code>airbnb-styleguide</code></a></p>
+				</section>
+
+				<section>
+					<h3>Type strict JavaScript</h3>
+
+					<h4><a href="https://flow.org/en/">Flow</a></h4>
+					<h4><a href="http://www.typescriptlang.org/">Typescript</a></h4>
+
+					<aside class="notes">
+						<ul>
+							<li>static type checking in JS</li>
+							<li>prevents the developer from making mistakes</li>
+							<li>I use flow type, opt-in</li>
+							<li>stuff like prop-types is only on runtime</li>
+							<li>lots of support from libs</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Try some Node.js</h3>
+
+					<aside class="notes">
+						<ul>
+							<li>Step outside of browsers</li>
+							<li>Learn from cool devs</li>
+							<li>Back-end coding</li>
+							<li>Your tools run on it!</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h2>Thanks!</h2>
+
+					<h3>Gaya Kessler</h3>
+					<h4>Freelance Web Developer</h4>
+
+					<p><br /></p>
+
+					<h5><a href="https://theclevernode.com">https://theclevernode.com</a></h5>
+					<h5><a href="https://twitter.com/gayakessler">@GayaKessler on Twitter</a></h5>
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+              controls: false,
+              progress: true,
+              history: true,
+              center: true,
+
+              transition: 'fade',
+
+              dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
