@@ -1,0 +1,465 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Moderne JavaScript en WordPress (WCRotterdam)</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/night.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/monokai-sublime.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<style>
+			.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5 {
+				font-family: "Open Sans";
+			}
+
+			.reveal pre {
+				box-shadow: none;
+				-moz-tab-size: 4;
+				-o-tab-size: 4;
+				tab-size: 4;
+			}
+
+			.reveal section img.free {
+				background: transparent;
+				border: 0;
+				box-shadow: none;
+			}
+
+			.hljs {
+				background: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>Moderne</h1>
+					<h1>JavaScript</h1>
+					<p style="opacity: 0.4">en WordPress</p>
+				</section>
+
+				<section data-background="images/culture-popularity-promo-superJumbo-v3.jpg">
+					<h1 style="padding-bottom: 25%">JavaScript is booming</h1>
+
+					<aside class="notes">
+						<ul>
+							<li>javascript is steeds belangrijker</li>
+							<li>steeds meer web apps</li>
+							<li>React Native / Native Script</li>
+							<li>Je kan niet echt meer zonder</li>
+							<li>Verwachtingen van gebruikers</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h2><a href="https://theclevernode.com">Gaya Kessler</a></h2>
+					<p>Freelance Full Stack Web Developer</p>
+					<p>JavaScript, React, Node.js</p>
+					<p><br />Maker van <a href="https://www.dramm.it">Drammit</a> en <a
+							href="https://www.getformable.com">Formable</a></p>
+
+					<p><a href="https://twitter.com/gayakessler">@GayaKessler</a> op Twitter</p>
+
+					<aside class="notes">
+						<ul>
+							<li>slides will be up later</li>
+							<li>mijn verbinding met WordPress</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Positie van JavaScript<br />over de jaren</h3>
+				</section>
+
+				<section>
+					<img width="400" src="images/flash.jpeg" alt="">
+					<h2>Flash voor fancy stuff</h2>
+				</section>
+
+				<section>
+					<img src="images/jquery.png" class="free" alt="">
+					<h2>jQuery en plugins</h2>
+
+					<aside class="notes">
+						<ul>
+							<li>Prototype en Mootools</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<img src="images/rise-frameworks.png" width="700" class="free" alt="">
+
+					<h3>Rise of the frameworks</h3>
+
+					<img src="images/rise-frameworks-2.png" width="700" class="free" alt="">
+
+					<aside class="notes">
+						<ul>
+							<li>Node.js tools</li>
+							<li>Grunt en Gulp</li>
+							<li>require.js</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h4>en de laatste tijd...</h4>
+					<img src="images/explosie-frameworks.png" width="700" class="free" alt="">
+
+					<h2>Explosie van</h2>
+					<h3>frameworks en tools</h3>
+
+					<aside class="notes">
+						<ul>
+							<li>React</li>
+							<li>Webpack</li>
+							<li>flux... redux... ?</li>
+							<li>Zo snel dat het bijna niet bij te houden is?</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h2>Hoe ziet de<br />toekomst er uit?</h2>
+				</section>
+
+				<section>
+					<h1>¯\_(ツ)_/¯</h1>
+				</section>
+
+				<section>
+					<h3>Er is veel werk</h3>
+
+					<aside class="notes">
+						<ul>
+							<li>Steeds meer aanbod</li>
+							<li>De tijd om te leren is nu</li>
+							<li>Populariteit stijgt alleen maar</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<img style="max-height: 70vh;" class="free" src="images/Copy-of-top-programming-languages-1.webp" alt="">
+				</section>
+
+				<section>
+					<h2>Wat is moderne JavaScript?</h2>
+				</section>
+
+				<section>
+					<h3>Nieuwe ECMAScript</h3>
+					<h4>en</h4>
+					<h3>Tools er omheen</h3>
+				</section>
+
+				<section>
+					<h2>Het is awesome!</h2>
+
+					<aside class="notes">
+						<ul>
+							<li>Taal groeit snel</li>
+							<li>Nieuwe syntax is fijn</li>
+							<li>Features worden steeds beter</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h4>Nadeel...</h4>
+					<h2>Gebruik is ingewikkeld</h2>
+
+					<aside class="notes">
+						<ul>
+							<li>Veel config met bijvoorbeeld WebPack</li>
+							<li>Veel verschillende tools</li>
+							<li>Goed opletten bij gebruik nieuwe features</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>"FRONT-END WAS<br />OOIT ZO MAKKELIJK!"</h3>
+
+					<aside class="notes">
+						<ul>
+							<li>Verhaal backenders die boos worden</li>
+							<li>Backend wordt ook steeds ingewikkelder</li>
+							<li>Compilede talen?</li>
+							<li>docker etc</li>
+							<li>Er zijn genoeg redenen waarom het niet anders kan</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section data-background="#f6dd3a">
+					<h3 style="color: #000; font-weight: 700">Waarom</h3>
+					<h2 style="color: #000; font-weight: 700">moderne JS</h2>
+					<h3 style="color: #000; font-weight: 700">gebruiken?</h3>
+				</section>
+
+				<section>
+					<h2>Modules</h2>
+
+					<aside class="notes">
+						<ul>
+							<li>
+								Het gebruik van modules voor structuur
+							</li>
+							<li>
+								npm modules gebruiken
+							</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h2>Verbeterde syntax</h2>
+				</section>
+
+				<section>
+					<h3>Nieuwe features in<br />oude omgevingen</h3>
+					<small>(was dit er ook maar voor PHP 5.2)</small>
+				</section>
+
+				<section>
+					<h3>Hoe kan ik moderne<br />JavaScript gebruiken?</h3>
+				</section>
+
+				<section>
+					<h3>Veel features<br />zijn ondersteund</h3>
+
+					<br /><br />
+					<a href="http://kangax.github.io/compat-table/es6/">
+						<small>http://kangax.github.io/compat-table/es6/</small>
+					</a>
+				</section>
+
+				<section data-background="#f4d55c">
+					<img src="images/babel.png" class="free" alt="">
+
+					<pre style="color: #a18d3a; text-align: center;">npm install @babel/preset-env</pre>
+				</section>
+
+				<section>
+					<h3>npm scripts / WebPack</h3>
+
+					<aside class="notes">
+						<ul>
+							<li>npm scripts voor taken</li>
+							<li>webpack voor bundelen van assets</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Moderne JS in het wild</h3>
+
+					<aside class="notes">
+						<ul>
+							<li>Verschillende situaties in WP context</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h2>Themabouwer</h2>
+
+					<ul>
+						<li>Vaak weinig JS</li>
+						<li>Grunt / Gulp voor assets</li>
+						<li>Babel werkt met deze tools</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Plugin developer</h2>
+
+					<h4>Front-end website assets</h4>
+
+					<aside class="notes">
+						<ul>
+							<li>gelijk aan vorige opzet</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h2>Plugin developer</h2>
+
+					<h4>Admin assets</h4>
+
+					<aside class="notes">
+						<ul>
+							<li>Simpel: hou het dan simpel</li>
+							<li>Uitgebreider? Denk eens aan SPA</li>
+							<li>WebPack nodig?</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Single page app<br />in de admin?</h3>
+				</section>
+
+				<section>
+					<h2><a href="https://github.com/facebook/create-react-app">Create React App</a></h2>
+
+					<aside class="notes">
+						<ul>
+							<li>Geen WebPack kennis nodig</li>
+							<li>devserver gebruiken om bundel in te laden</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<img src="images/cra-dev.png" class="free" alt="">
+				</section>
+
+				<section>
+					<h3>Builden voor release</h3>
+				</section>
+
+				<section>
+					<h4>Problem:</h4>
+					<h2>Dependency management in WordPress</h2>
+
+					<aside class="notes">
+						<ul>
+							<li>Waarschijnlijk dubbele dependencies</li>
+							<li>PHP regelt JavaScript dependencies</li>
+							<li>Hopen dat het maar goed gaat</li>
+							<li>Zelf transpilen en builden</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Aliasing in WebPack</h3>
+
+					<br />
+					<pre><code style="text-align: center" class="javascript">import $ from 'jquery'; // window.jQuery</code></pre>
+
+					<aside class="notes">
+						<ul>
+							<li>Vertel WebPack dat een import van buitenaf komt</li>
+							<li>Tricky oplossing voor dubbele dependencies</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Best of both world</h3>
+				</section>
+
+				<section>
+					<h5>WordPress als backend</h5>
+					<h2>JAM stack!</h2>
+
+					<aside class="notes">
+						<ul>
+							<li>JavaScript</li>
+							<li>API</li>
+							<li>Markup</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>JavaScript en markup</h3>
+					<h2>WordPress als API</h2>
+				</section>
+
+				<section>
+					<img src="images/jam-1.png" class="free" alt="">
+				</section>
+
+				<section>
+					<img src="images/jam-2.png" class="free" alt="">
+				</section>
+
+				<section>
+					<img src="images/jam-3.png" class="free" alt="">
+				</section>
+
+				<section>
+					<img src="images/jam-4.png" class="free" alt="">
+				</section>
+
+				<section>
+					<h2>Gatsby &amp; WordPress</h2>
+					<h4>=</h4>
+					<h3>Static website &amp; WordPress admin</h3>
+				</section>
+
+				<section>
+					<h3>De toekomst ziet<br />er goed uit</h3>
+				</section>
+
+				<section>
+					<h3>Nu is hét moment</h3>
+				</section>
+
+				<section>
+					<h3>Kom met me praten als je interesse hebt</h3>
+				</section>
+
+				<section>
+					<h2>Thanks!</h2>
+
+					<p><br /></p>
+
+					<h2>Gaya Kessler</h2>
+
+					<p><br /></p>
+
+					<h5><a href="https://theclevernode.com">https://theclevernode.com</a></h5>
+					<h5><a href="https://twitter.com/gayakessler">@GayaKessler op Twitter</a></h5>
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+              controls: false,
+              progress: true,
+              history: true,
+              center: true,
+
+              transition: 'fade',
+
+              dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
