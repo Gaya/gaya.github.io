@@ -1,0 +1,428 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Higher-order Functions and Composition</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/night.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/monokai-sublime.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<style>
+			.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5 {
+				font-family: "Open Sans";
+			}
+
+			.reveal pre {
+				box-shadow: none;
+				-moz-tab-size: 4;
+				-o-tab-size: 4;
+				tab-size: 4;
+			}
+
+			.hljs {
+				background: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h2>Higher-order Functions</h2><h2>and Composition</h2>
+					<p>Eindhoven Front-end Meetup</p>
+					<p>Nov. 20, 2018.</p>
+				</section>
+
+				<section>
+					<h2>Gaya Kessler</h2>
+					<h3>Freelance Developer</h3>
+					<p><br /></p>
+					<p>JavaScript, Node.js, React</p>
+					<p>Workshops and training</p>
+				</section>
+
+				<section>
+					<h3>Pt. 1:</h3>
+					<h1>Higher-order Functions</h1>
+
+					<aside class="notes">
+						<ul>
+							<li>Talking about HOF</li>
+							<li>Examples will be in JavaScript ES6</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h2>What is a higher-order function?</h2>
+
+					<aside class="notes">
+						<ul>
+							<li>Raise hands who heard about this term</li>
+							<li>Keep raised who know what it is</li>
+							<li>Keep raised who uses it</li>
+							<li>Keep raised who uses it for composition</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>
+						"A function accepting another function as an one of its arguments to produce
+						a result."
+					</h3>
+					<p>- Gaya Kessler</p>
+
+					<aside class="notes">
+						<ul>
+							<li>
+								Result can be anything
+							</li>
+							<li>
+								Even a function
+							</li>
+							<li>
+								As long as what you pass it always creates the same result
+							</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Used in functional programming</h3>
+				</section>
+
+				<section>
+					<h3>Use Case:</h3>
+					<h3>A function creating a function</h3>
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="javascript">
+function createPow(exponent) {
+	return function(base) {
+		return Math.pow(base, exponent);
+	}
+}
+
+const triplePow = createPow(3);
+
+triplePow(2); // 8
+triplePow(3); // 17
+</code></pre>
+				</section>
+
+				<section>
+					<h2>Why is this useful?</h2>
+				</section>
+
+				<section>
+					<h3>Composition</h3>
+
+					<aside class="notes">
+						We'll get back to that later
+					</aside>
+				</section>
+
+				<section>
+					<h3>Code is very reusable</h3>
+
+					<p><br /></p>
+
+					<pre><code data-trim data-noescape class="javascript">
+const doublePow = createPow(2);
+const triplePow = createPow(3);
+const quadruplePow = createPow(4);
+					</code></pre>
+				</section>
+
+				<section>
+					<h3>Code becomes very testable</h3>
+
+					<aside class="notes">
+						<ul>
+							<li>Also because functional programming</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Makes you smarter</h3>
+				</section>
+
+				<section>
+					<h2>How do they work?</h2>
+				</section>
+
+				<section>
+					<h3>Functions are values</h3>
+
+					<aside class="notes">
+						Executable variables
+					</aside>
+				</section>
+
+				<section>
+					<h3>Functions have access to their outside scope</h3>
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="javascript">
+function createPow(exponent) {
+	return function(base) {
+		return Math.pow(base, exponent);
+	}
+}
+</code></pre>
+				</section>
+
+				<section>
+					<p>But... the returned value doesn't have to!</p>
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="javascript">
+function createSecret(secret) {
+	return function tellSecret() {
+		return `My secret is: ${secret}`;
+	}
+}
+
+const getMySecret = createSecret('You lost the game');
+
+// somewhere else in the code
+
+tellMySecret(); // My secret is: You lost the game
+</code></pre>
+				</section>
+
+				<section>
+					<h3>Often used with closures</h3>
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="javascript">
+const people = [
+	{ id: 1, name: 'Tom' },
+	{ id: 2, name: 'Harry' },
+];
+
+for (let i = 0; i < people.length; i++) {
+	const button = document.createElement('button');
+	button.value = people[i].name;
+	button.onClick = function() {
+		window.location = `/person/${people[i].id}`;
+	}
+
+	document.body.appendChild(button);
+}
+</code></pre>
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="javascript">
+function navTo(id) {
+	return function() {
+		window.location = `/person/${id}`;
+	}
+}
+
+// same as
+
+const navTo = id => () => window.location = `/person/${id}`;
+</code></pre>
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="javascript">
+const navTo = id => () => window.location = `/person/${id}`;
+
+const people = [
+	{ id: 1, name: 'Tom' },
+	{ id: 2, name: 'Harry' },
+];
+
+for (let i = 0; i < people.length; i++) {
+	const button = document.createElement('button');
+	button.value = people[i].name;
+	button.onClick = navTo(people[i].id);
+
+	document.body.appendChild(button);
+}
+</code></pre>
+				</section>
+
+				<section>
+					<h3>Pt. 2</h3>
+					<h1>Composition</h1>
+				</section>
+
+				<section>
+					<h2>Monads</h2>
+				</section>
+
+				<section>
+					<h4>
+						When you finally understand Monads,
+					</h4>
+					<h4>
+						you'll lose the ability to explain it to
+						others.
+					</h4>
+				</section>
+
+				<section>
+					<h4>Let's go back a bit</h4>
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="javascript">
+function createPow(exponent) {
+	return function(base) {
+		return Math.pow(base, exponent);
+	}
+}
+
+const triple = createPow(3);
+</code></pre>
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="javascript">
+function sum(a, b) {
+	return a + b;
+}
+
+sum(3, 4); // 7
+</code></pre>
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="javascript">
+triple(sum(3, 4)); // (3 + 4) ^ 3 = 343
+</code></pre>
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="javascript">
+const sumAndTriple = compose(createPow(3), sum);
+
+addAndTriple(3, 4); // 343
+</code></pre>
+				</section>
+
+				<section>
+					<h3>Execute functions from right to left, passing along the result</h3>
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="javascript">
+function compose(...funcs) {
+	return funcs.reduce((a, b) => (...args) => a(b(...args)))
+}
+</code></pre>
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="javascript">
+compose(f, g, h)(1);
+
+// same as
+
+f(g(h(1));
+</code></pre>
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="javascript">
+compose(
+	createPow(3),
+	sum,
+)(3, 4) // 343
+
+// same as
+
+createPow(3)(sum(3, 4));
+</code></pre>
+				</section>
+
+				<section>
+<pre><code data-trim data-noescape class="javascript">
+compose(
+	whenYou,
+	haveALotOf,
+	differentFunctions,
+	youNeedTo,
+	composeTogether,
+)(input);
+</code></pre>
+				</section>
+
+				<section>
+					<h4>Hope this makes sense</h4>
+				</section>
+
+				<section>
+					<h4>You don't need to be a mathematician</h4>
+				</section>
+
+				<section>
+					<h4>My advise: start using function creators.</h4>
+				</section>
+
+				<section>
+					<h3>Thanks!</h3>
+					<h2>Questions?</h2>
+
+					<p><br /></p>
+
+					<h3>Gaya Kessler</h3>
+					<h4>Freelance Developer</h4>
+
+					<p><br /></p>
+
+					<h5><a href="https://theclevernode.com">https://theclevernode.com</a></h5>
+					<h5><a href="https://twitter.com/gayakessler">@GayaKessler on Twitter</a></h5>
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+              controls: false,
+              progress: true,
+              history: true,
+              center: true,
+
+              transition: 'fade',
+
+              dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
