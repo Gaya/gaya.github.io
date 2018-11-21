@@ -221,7 +221,7 @@ const people = [
 	{ id: 2, name: 'Harry' },
 ];
 
-for (let i = 0; i < people.length; i++) {
+for (var i = 0; i < people.length; i++) {
 	const button = document.createElement('button');
 	button.value = people[i].name;
 	button.onClick = function() {
@@ -256,7 +256,7 @@ const people = [
 	{ id: 2, name: 'Harry' },
 ];
 
-for (let i = 0; i < people.length; i++) {
+for (var i = 0; i < people.length; i++) {
 	const button = document.createElement('button');
 	button.value = people[i].name;
 	button.onClick = navTo(people[i].id);
