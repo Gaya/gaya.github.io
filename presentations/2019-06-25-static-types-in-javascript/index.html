@@ -1,0 +1,184 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Static Types talk</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="plugin/highlight/styles/monokai-sublime.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>Static Types</h1>
+					<h2>in JavaScript</h2>
+					<h4>Eindhoven Front-end Meetup</h4>
+				</section>
+
+				<section>
+					<h2>🥵 Hot isn't it?!</h2>
+				</section>
+
+				<section>
+					<h3>JavaScript is a dynamic language</h3>
+					<p>Doesn't really matter what type you use</p>
+				</section>
+
+				<section>
+					<h4>Plain JS</h4>
+					<pre><code class="javascript">let name = 'Gaya';
+name = 42;</code></pre>
+				</section>
+
+				<section>
+					<h4>TypeScript</h4>
+					<pre><code class="typescript">let name: string = 'Gaya';
+name = 42; // Type '42' is not assignable to type 'string'.</code></pre>
+				</section>
+
+				<section>
+					<h3>Describe your functions</h3>
+					<pre><code class="typescript">function giveName(name: string): string {
+  return name;
+}
+
+const name: string = giveName('Gaya');
+
+const fakeName: number = giveName('Gaya');
+// Type 'string' is not assignable to type 'number'.
+
+giveName(42);
+// Argument of type '42' is not assignable
+// to parameter of type 'string'.</code></pre>
+				</section>
+
+				<section>
+					<h3>Makes your code a bit more predictable</h3>
+				</section>
+
+				<section>
+					<h4>If you like Object Oriented programming,</h4>
+					<small style="opacity: 0.1">little weird but okay.</small>
+					<h4>you'll like TypeScript.</h4>
+				</section>
+
+				<section>
+					<h4>In a way you're documenting your code</h4>
+				</section>
+
+				<section>
+					<h2>Intellisense / Hinting</h2>
+
+					<h4>Also for installed modules</h4>
+				</section>
+
+				<section>
+					<h2>Works great with frameworks</h2>
+
+					<ul>
+						<li>Create React App</li>
+						<li>Vue CLI</li>
+						<li>Next.js</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>You can define complex stuff</h3>
+
+					<ul>
+						<li>Promises and the resolved type</li>
+						<li>Shapes of objects</li>
+						<li>What arguments a callback will be called with</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>It will make refactoring easier</h2>
+				</section>
+
+				<section>
+					<h1>Some cons</h1>
+				</section>
+
+				<section>
+					<h3>TypeScript is not JavaScript</h3>
+
+					<ul>
+						<li>They add their own features</li>
+						<li>.ts and .tsx files</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>The learning curve is steep</h3>
+
+					<p>Prepare to use <code class="typescript">any</code> a lot</p>
+				</section>
+
+				<section>
+					<h3>I found TypeScript setup to be a pain in the butt</h3>
+					<h5>Flow Type was a bit easier</h5>
+				</section>
+
+				<section>
+					<h3>Helps solidify your code</h3>
+					<h5>Slows down proof of concepts</h5>
+				</section>
+
+				<section>
+					<h2>So, do I use it?</h2>
+					<h4>Yes.</h4>
+				</section>
+
+				<section>
+					<h2>TypeScript or Flow Type?</h2>
+					<h4>TypeScript. Mainly because of popularity</h4>
+				</section>
+
+				<section>
+					<h1>Thanks for Listening</h1>
+
+					<p>Gaya Kessler</p>
+					<p><a href="https://theclevernode.com">https://theclevernode.com</a></p>
+				</section>
+
+				<section>
+					<h1>Let's discuss</h1>
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				history: true,
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.pack.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
